@@ -1,0 +1,106 @@
+
+
+body {
+    background: url("./josh-rinard-71760.jpg");
+    background-size: cover;
+    font-family: 'Ubuntu', sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, a {
+    margin:0;
+    padding:0;
+}
+
+
+h1{
+    font-family: "HP Simplified Light";
+}
+.login {
+    margin:0 auto;
+    max-width:300px;
+}
+.login-header {
+    color:#fff;
+    text-align:center;
+    font-size:150%;
+}
+
+.login-header h1 {
+   text-shadow: 0px 5px 15px #000;
+}
+
+.login-form {
+    margin: 0 auto;
+    border:.5px solid #fff;
+    background: #000000;
+    opacity: 0.8;
+}
+
+.login-form {
+    color: black;
+    background-color: #F9F8F8;
+    width: 45%;
+    /*border-radius: 30px;*/
+    height: auto;
+    margin-top: 43px;
+    padding-top:15px;
+    padding-bottom:3%;
+    text-align:center;
+}
+.login-form h3 {
+    font-size: 12px;
+    text-align: left !important;
+    margin-left:40px;
+    margin-bottom: 5px;
+    color: #000000;
+}
+
+input{
+    width: 90%;
+}
+
+button {
+    font-size: 15px;
+    height: 30px;
+    width: 70%;
+    color: black;
+    cursor: pointer;
+    margin-top: 13px;
+    font-weight: bolder;
+}
+
+.login-form input[type="button"] {
+    font-size: 15px;
+    height: 30px;
+    width: 70%;
+    color: black;
+    cursor: pointer;
+    margin-top: 13px;
+    font-weight: bolder;
+    outline: none;
+}
+
+.sign-up{
+    color:#f2f2f2;
+    margin-left:-55%;
+    cursor:pointer;
+    text-decoration:underline;
+    font-size: 20px;
+}
+
+/*Media Querie*/
+@media only screen and (min-width : 150px) and (max-width : 800px){
+
+    .login-form h3 {
+        text-align:center;
+        margin-left: 10px;
+    }
+    .sign-up, .no-access {
+        margin:10px 0;
+    }
+    .login-button {
+        margin-bottom:30px;
+    }
+}

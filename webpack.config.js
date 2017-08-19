@@ -48,31 +48,45 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: [
-    'webpack-dev-server/client?http://localhost:5000',
-    'webpack/hot/dev-server',
-    './scripts/index'
-  ],
-  output: {
-    path: __dirname,
-    filename: 'bundle.js',
-    publicPath: '/static/'
-  },
-  resolve: {
-    extensions: ['', '.js']
-  },
-  devtool: 'eval-source-map',
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: ['babel'],
-        include: path.join(__dirname, 'scripts')
-      }
-    ]
-  }
+    entry: [
+        'webpack-dev-server/client?http://' + require("os").hostname() + ':9090/',
+        'webpack/hot/dev-server',
+        './scripts/index'
+    ],
+    output: {
+        path: __dirname,
+        filename: 'bundle.js',
+        publicPath: '/static/'
+    },
+    resolve: {
+        extensions: ['', '.js']
+    }, devServer: {
+        inline: true,
+        port: 8008
+    },
+    devtool: 'eval-source-map',
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+    ],
+    module: {
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                loaders: ['babel'],
+                include: path.join(__dirname, 'scripts')
+            }, {
+                test: /\.css$/,
+                loaders: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(?:png|jpg|svg)$/,
+                loader: 'url-loader',
+                query: {
+                    // Inline images smaller than 10kb as data URIs
+                    limit: 10000
+                }
+            }
+        ]
+    }
 };
