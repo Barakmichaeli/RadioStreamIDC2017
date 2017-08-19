@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
-import {Signup} from './LoginRegisterApi';
+import {Signup} from './clientApi/LoginRegisterApi';
 
 class Register extends Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class Register extends Component {
                     }}> Sign me up!
                     </button>
                     <br/>
-                    <Link to={"/login"}> <input type="button" value="Go to Login" classname="register-button"/></Link>
+                    <Link to={"/login"}> <input type="button" value="Go to Login" className="register-button"/></Link>
                 </div>
             </div>
         )

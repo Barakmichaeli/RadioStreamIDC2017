@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
-import {Log} from './LoginRegisterApi';
+import {Log} from './clientApi/LoginRegisterApi';
 import './App.css'
 
 

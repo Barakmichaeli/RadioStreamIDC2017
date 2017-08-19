@@ -1,8 +1,8 @@
 /**
  * Created by barak on 18/08/2017.
  */
-let apiServer =  require("./backendServer");
-let appServer =  require("./server");
+let apiServer =  require("./server/backendServer");
+let appServer =  require("./src/server");
 
 const PORT = process.env.PORT || 8080;
 const PROD = process.env.NODE_ENV === "production";

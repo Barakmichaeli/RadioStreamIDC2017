@@ -1,9 +1,9 @@
 
 
 body {
-    background: url("./josh-rinard-71760.jpg");
+    background: url("images/josh-rinard-71760.jpg");
     background-size: cover;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'HP Simplified Light', cursive;
     width: 100%;
     height: 100%;
 }
@@ -14,9 +14,6 @@ h1, h2, h3, h4, h5, h6, a {
 }
 
 
-h1{
-    font-family: "HP Simplified Light";
-}
 .login {
     margin:0 auto;
     max-width:300px;
@@ -41,8 +38,7 @@ h1{
 .login-form {
     color: black;
     background-color: #F9F8F8;
-    width: 45%;
-    /*border-radius: 30px;*/
+    width: 35%;
     height: auto;
     margin-top: 43px;
     padding-top:15px;

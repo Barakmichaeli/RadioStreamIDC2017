@@ -51,7 +51,7 @@ module.exports = {
     entry: [
         'webpack-dev-server/client?http://' + require("os").hostname() + ':9090/',
         'webpack/hot/dev-server',
-        './scripts/index'
+        './src/index'
     ],
     output: {
         path: __dirname,
@@ -74,7 +74,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loaders: ['babel'],
-                include: path.join(__dirname, 'scripts')
+                include: path.join(__dirname, 'src')
             }, {
                 test: /\.css$/,
                 loaders: ['style-loader', 'css-loader']
@@ -84,8 +84,12 @@ module.exports = {
                 loader: 'url-loader',
                 query: {
                     // Inline images smaller than 10kb as data URIs
-                    limit: 10000
+                    // limit: 10000
                 }
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
             }
         ]
     }
