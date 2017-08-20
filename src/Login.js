@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import {Log} from './clientApi/LoginRegisterApi';
-import './App.css'
 
 
 class Login extends Component {
@@ -11,7 +10,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="login-container container">
                 <div className="login-header">
                     <h1>RadioStream Login</h1>
                     <br/>

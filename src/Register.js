@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import {Signup} from './clientApi/LoginRegisterApi';
+import './App.css'
 
 class Register extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class Register extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="register-container">
                 <div className="login-header">
                     <h1>RadioStream Register</h1>
                     <br/>

@@ -14,7 +14,8 @@ export function Signup(e) {
 
     fetch("http://localhost:8079/register", {
         method: "POST",
-        body: JSON.stringify({name : "barak" , password : "123456"}),
+        body: JSON.stringify({name : "barak" ,
+            password : "123456"}),
         headers: {
             "Content-Type": "application/json"
         },
