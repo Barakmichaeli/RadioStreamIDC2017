@@ -12,13 +12,12 @@ class Register extends Component {
 
     render() {
         return (
-
-            <div className="register-container">
+            
+            <div className="container">
                 <div className="login-header">
                     <h1>RadioStream Register</h1>
                     <br/>
                 </div>
-
                 <div className="login-form">
                     <h3>Username:</h3>
                     <input className="username" type="text" placeholder="Username"/>

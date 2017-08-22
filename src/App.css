@@ -1,8 +1,4 @@
-html {
-    margin: 0px;
-    padding: 0px;
 
-}
 
 body {
     background: url("images/josh-rinard-71760.jpg");
@@ -10,34 +6,31 @@ body {
     font-family: 'HP Simplified Light', cursive;
     width: 100%;
     height: 100%;
-    margin: 0px;
-    padding: 0px;
-
 }
 
 h1, h2, h3, h4, h5, h6, a {
-    margin: 0;
-    padding: 0;
+    margin:0;
+    padding:0;
 }
+
 
 .login {
-    margin: 0 auto;
-    max-width: 300px;
+    margin:0 auto;
+    max-width:300px;
 }
-
 .login-header {
-    color: #fff;
-    text-align: center;
-    font-size: 150%;
+    color:#fff;
+    text-align:center;
+    font-size:150%;
 }
 
 .login-header h1 {
-    text-shadow: 0px 5px 15px #000;
+   text-shadow: 0px 5px 15px #000;
 }
 
 .login-form {
     margin: 0 auto;
-    border: .5px solid #fff;
+    border:.5px solid #fff;
     background: #000000;
     opacity: 0.8;
 }
@@ -48,20 +41,19 @@ h1, h2, h3, h4, h5, h6, a {
     width: 35%;
     height: auto;
     margin-top: 43px;
-    padding-top: 15px;
-    padding-bottom: 3%;
-    text-align: center;
+    padding-top:15px;
+    padding-bottom:3%;
+    text-align:center;
 }
-
 .login-form h3 {
     font-size: 12px;
     text-align: left !important;
-    margin-left: 40px;
+    margin-left:40px;
     margin-bottom: 5px;
     color: #000000;
 }
 
-input {
+input{
     width: 90%;
 }
 
@@ -86,51 +78,25 @@ button {
     outline: none;
 }
 
-.sign-up {
-    color: #f2f2f2;
-    margin-left: -55%;
-    cursor: pointer;
-    text-decoration: underline;
+.sign-up{
+    color:#f2f2f2;
+    margin-left:-55%;
+    cursor:pointer;
+    text-decoration:underline;
     font-size: 20px;
 }
-
-.upper-menu {
-    height: 8%;
-    padding: 0;
-    text-align: center;
-    /*position: relative;*/
-    background-color: #000000;
-}
-
-table {
-    margin-left: auto;
-    margin-right: auto;
-    vertical-align: bottom;
-    /*position: absolute;*/
-}
-
-td {
-    padding: 5px;
-    border-right: 0.5px solid  #ffffff;
-    cursor: pointer;
-    font-size: 20px;
-    color: white;
-}
-
 
 /*Media Querie*/
-@media only screen and (min-width: 150px) and (max-width: 800px) {
+@media only screen and (min-width : 150px) and (max-width : 800px){
 
     .login-form h3 {
-        text-align: center;
+        text-align:center;
         margin-left: 10px;
     }
-
     .sign-up, .no-access {
-        margin: 10px 0;
+        margin:10px 0;
     }
-
     .login-button {
-        margin-bottom: 30px;
+        margin-bottom:30px;
     }
 }
