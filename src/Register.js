@@ -12,7 +12,7 @@ class Register extends Component {
 
     render() {
         return (
-            
+
             <div className="container">
                 <div className="login-header">
                     <h1>RadioStream Register</h1>
