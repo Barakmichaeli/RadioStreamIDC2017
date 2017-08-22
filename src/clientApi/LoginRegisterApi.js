@@ -46,23 +46,21 @@ export function Signup(e) {
     }
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
-        pass[0].placeholder = 'Eight valid characters ';
+        pass[0].placeholder = 'Enter Password';
     } else {
         pass[0].style.borderColor = "white";
     }
     if (repass[0].value.length < 8) {
         repass[0].style.borderColor = "red";
-        repass[0].placeholder = 'Password again';
+        repass[0].placeholder = 'Enter Password';
     } else {
         repass[0].style.borderColor = "white";
     }
 
-
-
     fetch("http://localhost:8079/register", {
         method: "POST",
-        body: JSON.stringify({name : "barak" ,
-            password : "123456"}),
+        body: JSON.stringify({username: username[0].value , password: pass[0].value, firstName: firstname[0].value,
+            lastName: lastname[0].value, email: email[0].value}),
         headers: {
             "Content-Type": "application/json"
         },
@@ -77,10 +75,13 @@ export function Signup(e) {
     }, function (error) {
         // error.message //=> String
     })
+
+
 }
 
 
 export function Log(e) {
+
 
 
     let username = document.getElementsByClassName('username');
@@ -97,7 +98,7 @@ export function Log(e) {
     }
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
-        pass[0].placeholder = 'Eight valid characters ';
+        pass[0].placeholder = 'Enter Password';
         flag = true;
     } else {
         pass[0].style.borderColor = "white";
@@ -107,64 +108,9 @@ export function Log(e) {
         return;
 
 
-    //Call fetch and check if registered
-    console.log(e);
-}
-
-
-export function updateData(e) {
-
-    // console.log(e);
-    let username = document.getElementsByClassName('username');
-    let firstname = document.getElementsByClassName('firstname');
-    let lastname = document.getElementsByClassName('lastname');
-    let email = document.getElementsByClassName('email');
-    let pass = document.getElementsByClassName('pass');
-    let repass = document.getElementsByClassName('re-pass');
-
-    if (username[0].value.length < 4) {
-        username[0].style.borderColor = "red";
-        username[0].placeholder = 'Enter User Name';
-    } else {
-        username[0].style.borderColor = "white";
-    }
-    if (firstname[0].value.length < 4) {
-        firstname[0].style.borderColor = "red";
-        firstname[0].placeholder = 'Enter First Name';
-    } else {
-        firstname[0].style.borderColor = "white";
-    }
-    if (lastname[0].value.length < 4) {
-        lastname[0].style.borderColor = "red";
-        lastname[0].placeholder = 'Enter Last Name';
-    } else {
-        lastname[0].style.borderColor = "white";
-    }
-    if (!validateEmail(email[0].value)) {
-        email[0].style.borderColor = "red";
-        email[0].placeholder = 'Enter Valid Mail';
-    } else {
-        email[0].style.borderColor = "white";
-    }
-    if (pass[0].value.length < 8) {
-        pass[0].style.borderColor = "red";
-        pass[0].placeholder = 'Eight valid characters ';
-    } else {
-        pass[0].style.borderColor = "white";
-    }
-    if (repass[0].value.length < 8) {
-        repass[0].style.borderColor = "red";
-        repass[0].placeholder = 'Password again ';
-    } else {
-        repass[0].style.borderColor = "white";
-    }
-
-
-
-    fetch("http://localhost:8079/update", {
+    fetch("http://localhost:8079/login", {
         method: "POST",
-        body: JSON.stringify({name : "barak" ,
-            password : "123456"}),
+        body: JSON.stringify({username: username[0].value , password: pass[0].value}),
         headers: {
             "Content-Type": "application/json"
         },
@@ -179,5 +125,6 @@ export function updateData(e) {
     }, function (error) {
         // error.message //=> String
     })
-}
 
+
+}
