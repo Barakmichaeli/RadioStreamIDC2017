@@ -29,7 +29,8 @@
     "react-router-dom": "^4.1.2",
     "regenerator-transform": "^0.10.1",
     "url-loader": "^0.5.9",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "zenscroll": "^4.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
