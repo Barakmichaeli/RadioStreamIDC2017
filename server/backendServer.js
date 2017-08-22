@@ -7,9 +7,11 @@ module.exports = (PORT) => {
 
     let express = require("express");
     const app = express();
-    var bodyParser = require('body-parser');
-    var fs = require('fs');
-
+    let bodyParser = require('body-parser');
+    let fs = require('fs');
+    let logedInUsers = {};
+    let UIDcountrer = 0;
+    let logedInUsersTag = {};
 
     app.listen(PORT, function (err) {
         if (err)
@@ -45,9 +47,9 @@ module.exports = (PORT) => {
             }
             //Convert the JSON file to apropriate format
             if (data.length !== 0) {
-                var text = data.replace(/}{/g, "},{").replace(/^{/, "[{") + "]";
+                let text = data.replace(/}{/g, "},{").replace(/^{/, "[{") + "]";
                 //Convert the array json to js array
-                var obj = JSON.parse(text);
+                let obj = JSON.parse(text);
                 for (i in obj) {
                     if (obj[i].userName === userName) {
                         callback(false);
@@ -60,16 +62,16 @@ module.exports = (PORT) => {
     }
 
     function authenticationLogin(userName, pass, callback) {
-        fs.readFile(file, 'utf8', function (err, data) {
+        fs.readFile(usersFile, 'utf8', function (err, data) {
             if (err) {
                 res.status(500).send("Opps, Something went wrong..");
             }
 
             if (data.length != 0) {
-                var x = data.replace(/}{/g, "},{").replace(/^{/, "[{") + "]";
+                let x = data.replace(/}{/g, "},{").replace(/^{/, "[{") + "]";
                 x = JSON.parse(x);
                 for (i in x) {
-                    if (x[i].userName === userName && x[i].password == pass) {
+                    if (x[i].userName === userName && x[i].password === pass) {
                         callback(true);
                         return;
                     }
@@ -90,12 +92,17 @@ module.exports = (PORT) => {
 
     app.post('/register', function (req, res) {
 
-        let name = req.body.name;
+        let name = req.body.username;
         let pass = req.body.password;
+        let first = req.body.firstName;
+        let last = req.body.lastName;
+        let email = req.body.email;
+
         authenticationRegister(name, function (val) {
             // If val == true then the user is authentic to register
             if (val) {
-                let obj = {userName: name, password: pass};
+                let obj = {userName: name, password: pass ,firstName: first, lastName: last,
+                    email: email};
                 let jsonObj = JSON.stringify(obj, null, 2);
                 //     Callback when created
                 fs.appendFile(usersFile, jsonObj, function (err) {
@@ -113,12 +120,12 @@ module.exports = (PORT) => {
 
     // Handling login request
     app.post('/login', function (req, res) {
-        let name = req.params.userId;
-        let pass = req.params.password;
+        let name = req.body.username;
+        let pass = req.body.password;
         authenticationLogin(name, pass, function (val) {
             //Exist
             if (val) {
-                var uid = logedInUsers[req.params.user];
+                let uid = logedInUsers[name];
                 //Already logged in
                 if (uid) { // Return his UID
                     res.cookie('uid', uid);
@@ -127,7 +134,7 @@ module.exports = (PORT) => {
                     logedInUsers[name] = UIDcountrer;
                     logedInUsersTag[UIDcountrer] = name;
 
-                    var options = {
+                    let options = {
                         maxAge: 1000 * 60 * 60, // would expire after 60 minutes
                         httpOnly: true, // The cookie only accessible by the web server
                         // signed: true // Indicates if the cookie should be signed

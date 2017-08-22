@@ -57,11 +57,10 @@ export function Signup(e) {
         repass[0].style.borderColor = "white";
     }
 
-
-
     fetch("http://localhost:8079/register", {
         method: "POST",
-        body: JSON.stringify({name : "barak" , password : "123456"}),
+        body: JSON.stringify({username: username[0].value , password: pass[0].value, firstName: firstname[0].value,
+            lastName: lastname[0].value, email: email[0].value}),
         headers: {
             "Content-Type": "application/json"
         },
@@ -109,8 +108,23 @@ export function Log(e) {
         return;
 
 
-    //Call fetch and check if registered
-    console.log(e);
+    fetch("http://localhost:8079/login", {
+        method: "POST",
+        body: JSON.stringify({username: username[0].value , password: pass[0].value}),
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    }).then(function (response) {
+        // response.status     //=> number 100–599
+        // response.statusText //=> String
+        // response.headers    //=> Headers
+        // response.url        //=> String
+        // return response.text()
+        console.log(response.status)
+    }, function (error) {
+        // error.message //=> String
+    })
 
 
 }
