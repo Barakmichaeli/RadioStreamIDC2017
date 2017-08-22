@@ -1,18 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Amatica+SC);
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
 html {
-    margin: 0px;
-    padding: 0px;
+
+    min-width: 800px;
 
 }
 
 body {
-    background: url("images/josh-rinard-71760.jpg");
     background-size: cover;
     font-family: 'HP Simplified Light', cursive;
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-
 }
 
 h1, h2, h3, h4, h5, h6, a {
@@ -32,7 +35,27 @@ h1, h2, h3, h4, h5, h6, a {
 }
 
 .login-header h1 {
+    font-family: 'Amatica SC', cursive;
     text-shadow: 0px 5px 15px #000;
+}
+
+.register-container {
+    background: url("images/kimberly-richards-335.jpg") center no-repeat;
+    background-size: cover;
+    height: 100vh;
+    overflow: auto;
+    width: 100%;
+    position: absolute;
+}
+
+.login-container {
+    background: url("images/kimberly-richards-335.jpg") center no-repeat;
+    background-size: cover;
+    height: 100vh;
+    overflow: auto;
+    width: 100%;
+    position: absolute;
+
 }
 
 .login-form {
@@ -46,19 +69,18 @@ h1, h2, h3, h4, h5, h6, a {
     color: black;
     background-color: #F9F8F8;
     width: 35%;
-    height: auto;
-    margin-top: 43px;
-    padding-top: 15px;
-    padding-bottom: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
     text-align: center;
 }
 
 .login-form h3 {
     font-size: 12px;
     text-align: left !important;
-    margin-left: 40px;
+    margin-left: 20px;
     margin-bottom: 5px;
     color: #000000;
+    font-weight: bolder;
 }
 
 input {
@@ -71,7 +93,6 @@ button {
     width: 70%;
     color: black;
     cursor: pointer;
-    margin-top: 13px;
     font-weight: bolder;
 }
 
@@ -98,7 +119,7 @@ button {
     height: 8%;
     padding: 0;
     text-align: center;
-    /*position: relative;*/
+    border-bottom: 1px solid white;
     background-color: #000000;
 }
 
@@ -111,15 +132,90 @@ table {
 
 td {
     padding: 5px;
-    border-right: 0.5px solid  #ffffff;
+    border-right: 0.5px solid #ffffff;
     cursor: pointer;
     font-size: 20px;
     color: white;
 }
 
+a {
+    text-decoration: none;
+}
+
+td:hover {
+    border-bottom: 3px solid white;
+}
+
+.team {
+    background: url("images/martin-wessely-210.jpg") fixed center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+
+.home {
+    background: url("images/oscar-keys-58399.jpg") fixed center no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+
+}
+
+.favorites {
+    background: url("images/jens-kreuter-185502.jpg") fixed center no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+}
+
+.personal {
+    background: url("images/greyson-joralemon-332028.jpg") fixed center no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+}
+
+.update-form {
+    margin-left: 7%;
+    padding: 12px;
+    margin-top: 3%;
+    width: 40%;
+    opacity: 0.9;
+    text-align: center;
+    background-color: white;
+
+}
+
+.stations-list {
+    float: left;
+    margin-top: 8%;
+}
+
+.station-item {
+    background-color: white;
+    border-radius: 5px;
+    width: 300px;
+    height: 6%;
+    margin-top: 3px;
+}
+
+.home-title {
+    color: white;
+    float: right;
+    margin-right: 10%;
+    margin-top: 15%;
+}
+
+audio {
+    margin-top: 10px;
+}
 
 /*Media Querie*/
-@media only screen and (min-width: 150px) and (max-width: 800px) {
+@media only screen and (min-width: 150px) and (max-width: 900px) {
 
     .login-form h3 {
         text-align: center;
