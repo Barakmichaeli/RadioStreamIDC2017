@@ -4,11 +4,11 @@
 import {Router, Route, Redirect} from 'react-router'
 import {BrowserRouter, Switch} from 'react-router-dom'
 import React, {Component} from 'react';
-import Login from './Login';
-import Register from './Register';
-import {isLoggedIn} from '../ServerApi'
-import Main from './Main';
-import '../App.css'
+import Login from './components/Login';
+import Register from './components/Register';
+// import {isLoggedIn} from './ServerApi'
+import Main from './components/Main';
+import './App.css'
 
 
 export default class Routing extends Component {
@@ -21,6 +21,7 @@ export default class Routing extends Component {
     }
 
     render() {
+        console.log("In routing");
         return (
             <BrowserRouter>
                 {(this.state.loggedIn) ?
@@ -28,19 +29,19 @@ export default class Routing extends Component {
                         <Route path="/main" component={Main}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
-                        <Redirect exact from="*" to="/Main"/>
+
+                        {/*handle not found*/}
+                        {/*<Redirect exact from="*" to="/Main"/>*/}
                     </Switch>
                     :
                     <Switch>
-                        <Route path="/login" component={Login}/>
-                        <Route path="/register" component={Register}/>
-                        {/*comment on next line !!*/}
+                        <Route exact path="/login" component={Login}/>
+                        <Route exact path="/register" component={Register}/>
                         <Route path="/main" component={Main}/>
-                        <Redirect exact from="*" to="/login"/>
+                        <Redirect from="*" to="/login"/>
                     </Switch>
                 }
             </BrowserRouter>
         )
-        isLoggedIn();
     }
 }
