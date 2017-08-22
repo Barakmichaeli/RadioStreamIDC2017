@@ -6,9 +6,9 @@ import {BrowserRouter, Switch} from 'react-router-dom'
 import React, {Component} from 'react';
 import Login from './Login';
 import Register from './Register';
-import {isLoggedIn} from './ServerApi'
-import Main from './main';
-import './App.css'
+import {isLoggedIn} from '../ServerApi'
+import Main from './Main';
+import '../App.css'
 
 
 export default class Routing extends Component {
@@ -21,7 +21,6 @@ export default class Routing extends Component {
     }
 
     render() {
-        isLoggedIn();
         return (
             <BrowserRouter>
                 {(this.state.loggedIn) ?
@@ -42,5 +41,6 @@ export default class Routing extends Component {
                 }
             </BrowserRouter>
         )
+        isLoggedIn();
     }
 }
