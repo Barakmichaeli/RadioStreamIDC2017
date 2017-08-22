@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
-import {Log} from './clientApi/LoginRegisterApi';
+import {Log} from '../clientApi/LoginRegisterApi';
 
 
 class Login extends Component {
@@ -12,7 +12,7 @@ class Login extends Component {
         return (
             <div className="login-container container">
                 <div className="login-header">
-                    <h1>RadioStream Login</h1>
+                    <h1><u>RadioStream Login</u></h1>
                     <br/>
                 </div>
                 <div className="login-form">
@@ -27,7 +27,7 @@ class Login extends Component {
                     }}> Login
                     </button>
                     <br/>
-                    <Link to={"/register"}><input type="button" value="Signup!"/></Link>
+                    <Link to={"/register"}><input type="button" value="Go to Signup!"/></Link>
                 </div>
             </div>
         )

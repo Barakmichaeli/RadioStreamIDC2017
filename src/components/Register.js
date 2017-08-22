@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
-import {Signup} from './clientApi/LoginRegisterApi';
+import {Signup} from '../clientApi/LoginRegisterApi';
 
 class Register extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class Register extends Component {
 
             <div className="register-container">
                 <div className="login-header">
-                    <h1>RadioStream Register</h1>
+                    <h1><u>RadioStream Register</u></h1>
                     <br/>
                 </div>
 
@@ -33,10 +33,10 @@ class Register extends Component {
                     <input className="email" type="email" placeholder="Email"/>
                     <br/> <br/>
                     <h3>Password:</h3>
-                    <input className="pass" type="password" placeholder="Password"/>
+                    <input className="pass" type="password" placeholder="Eight valid characters "/>
                     <br/> <br/>
                     <h3>Retype password:</h3>
-                    <input className="re-pass" type="password" placeholder="Password again"/>
+                    <input className="re-pass" type="password" placeholder="Eight valid characters "/>
                     <br/> <br/>
                     <button onClick={ (e) => {
                         Signup(e);
