@@ -17,4 +17,4 @@ module.exports = (PORT) => {
         }
         console.log('Listening at localhost:' + PORT);
     });
-}
+};

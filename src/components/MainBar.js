@@ -99,9 +99,17 @@ class MainBar extends Component {
             <header className="upper-menu">
                 <div className="icon">
                 </div>
+                logout
+
                 <table>
                     <tbody>
                     <tr>
+                        <Link to="/login">
+                            <td id="logout">
+                                logout
+                            </td>
+                        </Link>
+
                         <Link to="/main/personal" onClick={() => {
                             this.setColor("personal");
                         }}>

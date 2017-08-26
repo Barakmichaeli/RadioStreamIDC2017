@@ -114,14 +114,107 @@ export function Log(e) {
         },
         credentials: "same-origin"
     }).then(function (response) {
-        // response.status     //=> number 100–599
-        // response.statusText //=> String
-        // response.headers    //=> Headers
-        // response.url        //=> String
-        // return response.text()
-        console.log(response.status)
+        console.log(response);
     }, function (error) {
-        // error.message //=> String
+        console.log(error.message);
     });
 }
+
+
+export function updateData(e) {
+
+    // console.log(e);
+    let username = document.getElementsByClassName('username');
+    let firstname = document.getElementsByClassName('firstname');
+    let lastname = document.getElementsByClassName('lastname');
+    let email = document.getElementsByClassName('email');
+    let pass = document.getElementsByClassName('pass');
+    let repass = document.getElementsByClassName('repass');
+    let flag = false;
+
+    if (firstname[0].value.length < 4) {
+        firstname[0].style.borderColor = "red";
+        firstname[0].placeholder = 'Enter First Name';
+        flag = true;
+    } else {
+        firstname[0].style.borderColor = "white";
+    }
+    if (lastname[0].value.length < 4) {
+        lastname[0].style.borderColor = "red";
+        lastname[0].placeholder = 'Enter Last Name';
+        flag = true;
+    } else {
+        lastname[0].style.borderColor = "white";
+    }
+    if (!validateEmail(email[0].value)) {
+        email[0].style.borderColor = "red";
+        email[0].placeholder = 'Enter Valid Mail';
+        flag = true;
+    } else {
+        email[0].style.borderColor = "white";
+    }
+
+
+    if (pass[0].value.length < 8) {
+        pass[0].style.borderColor = "red";
+        flag = true;
+    } else {
+        pass[0].style.borderColor = "white";
+    }
+
+    if (repass[0].value.length < 8) {
+        repass[0].style.borderColor = "red";
+        flag = true;
+    } else {
+        repass[0].style.borderColor = "white";
+    }
+
+    if (repass[0].value !== pass[0].value) {
+        document.getElementsByClassName("update-message")[0].innerHTML = "Passwords do not match";
+        flag = true;
+    } else {
+        document.getElementsByClassName("update-message")[0].innerHTML = "";
+    }
+    if (flag)
+        return;
+
+    fetch("http://localhost:8079/update", {
+        method: "POST",
+        body: JSON.stringify({
+            userName: username[0].value,
+            password: pass[0].value,
+            firstName: firstname[0].value,
+            lastName: lastname[0].value,
+            email: email[0].value
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+    }).then(function (response) {
+        response.json().then(function (res) {
+            console.log(response.status);
+            if (response.status === 200) {
+                document.getElementsByClassName("update-message")[0].innerHTML = "Information Updated :)";
+            }
+            else {
+                document.getElementsByClassName("update-message")[0].innerHTML = "Opps.. something went wrong, please try again later";
+            }
+            // response.status     //=> number 100–599
+            // response.statusText //=> String
+            // response.headers    //=> Headers
+            // response.url        //=> String
+            // return response.text()
+        });
+    }, function (error) {
+        console.log(error);
+        // error.message //=> String
+    })
+}
+
+
+
+
+
+
 

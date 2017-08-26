@@ -20,6 +20,7 @@ class ListItem extends Component {
         //Get user information
 
 
+
         //update favorites in server
         let self = this;
         fetch("http://localhost:8079/addFavorite", {
@@ -44,6 +45,7 @@ class ListItem extends Component {
 
     removeFavorite(mode) {
         //Get user information
+
 
 
         //update favorites in server

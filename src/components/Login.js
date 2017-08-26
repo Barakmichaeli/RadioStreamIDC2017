@@ -24,6 +24,7 @@ class Login extends Component {
                     <br/> <br/>
                     <button  onClick={ (e) =>{
                         Log(e);
+                        //Redirect to main
                     }}> Login
                     </button>
                     <br/>

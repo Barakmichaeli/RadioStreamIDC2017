@@ -13,18 +13,15 @@ import {Switch} from 'react-router-dom'
 
 class Main extends Component {
 
-
     render() {
         return (
             <div className="container-home">
-                {/*{this.getData()}*/}
                 <MainBar/>
                 <Switch>
                     <Route exact path="/main/home" component={Home}/>
                     <Route exact path="/main/favorites" component={Favorites}/>
                     <Route exact path="/main/personal" component={Personal}/>
                     <Route exact path="/main/team" component={Team}/>
-                    {/*Error page*/}
                 </Switch>
             </div>
         )

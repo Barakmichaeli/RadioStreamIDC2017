@@ -8,29 +8,23 @@ import Login from './components/Login';
 import Register from './components/Register';
 // import {isLoggedIn} from './ServerApi'
 import Main from './components/Main';
-import Favorites from './components/Favorites';
 import './App.css'
+let loggedIn = false;
 
 
 export default class Routing extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            loggedIn: false
-        }
-    }
+
 
     render() {
         console.log("In routing");
         return (
             <BrowserRouter>
-                {(this.state.loggedIn) ?
+                {(loggedIn)?
                     <Switch>
                         <Route path="/main" component={Main}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
-
                         {/*handle not found*/}
                         {/*<Redirect exact from="*" to="/Main"/>*/}
                     </Switch>
