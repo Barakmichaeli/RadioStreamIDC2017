@@ -90,6 +90,7 @@ module.exports = (PORT) => {
                 throw Error("Error while creating user list");
         });
     }
+
     configureLists();
 
 
@@ -105,8 +106,10 @@ module.exports = (PORT) => {
             // If val == true then the user is authentic to register
 
             if (val) {
-                let obj = {userName: name, password: pass ,firstName: first, lastName: last,
-                    email: email};
+                let obj = {
+                    userName: name, password: pass, firstName: first, lastName: last,
+                    email: email
+                };
                 let jsonObj = JSON.stringify(obj, null, 2);
                 //     Callback when created
                 fs.appendFile(usersFile, jsonObj, function (err) {
@@ -166,13 +169,136 @@ module.exports = (PORT) => {
         });
     });
 
+    app.post('/addFavorite', function (req, res) {
 
+        let username = req.body.username;
+        let station = req.body.station;
+        let action = req.body.status;
+        //Validate if logged in?
 
+        fs.readFile(usersFile, 'utf8', function (err, data) {
+            if (err) {
+                res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
+            }
+            //Our data
+            console.log(station);
+            let obj = JSON.parse(data);
 
+            //Search for the file
+            for (x in obj) {
+                if (obj[x].userName === username) {
+                    obj[x].favorites.push(station);
+                    //add to the favorite lists
+                    fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
+                        if (err) {
+                            console.log(err.message)
+                            res.status(500).send(JSON.stringify({text: "Error override the file"}));
+                        }
+                        ;
+                        console.log('file saved');
+                    });
+                    break;
+                }
+            }
+            res.status(200).send(JSON.stringify({text: "Added"}));
+        });
+    });
 
+    // Handling login request
+    app.post('/removeFavorite', function (req, res) {
 
+        let username = req.body.username;
+        let station = req.body.station;
+        //Validate if logged in?
 
+        fs.readFile(usersFile, 'utf8', function (err, data) {
+            if (err) {
+                res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
+            }
 
+            //Our data
+            let obj = JSON.parse(data);
 
+            //Search for the file
+            for (x in obj) {
+                if (obj[x].userName === username) {
+                    if (obj[x].favorites.includes(station)) {
+                        let index = obj[x].favorites.indexOf(station);
+                        obj[x].favorites.splice(index, 1);
+                    }
+                    //add to the favorite lists
+                    fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
+                        if (err) {
+                            console.log(err.message);
+                            res.status(500).send(JSON.stringify({text: "Error override the file"}));
+                        }
+                        ;
+                    });
+                    break;
+                }
+            }
+            res.status(200).send(JSON.stringify({text: "Removed"}));
+        });
+    });
+    app.post('/update', function (req, res) {
+        console.log("Update information request arrived")
+        let username = req.body.username
+        // Check if user is connected
+        if(logedInUsers.username) {
+            console.log('User is logged in...')
+            fs.readFile(usersFile, 'utf8', function (err, data) {
+                if (err) {
+                    res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
+                }
+                let obj = JSON.parse(data);
+                //Search for the file
+                for (currentUser in obj) {
+                    if (obj[currentUser].userName === username) {
+                        obj[currentUser].firstName = req.body.firstName
+                        obj[currentUser].lastName = req.body.lastName
+                        obj[currentUser].email = req.body.email
+                        obj[currentUser].password = req.body.password
+                    }
+                    // Write back updated user details to users file
+                    fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
+                        if (err) {
+                            console.log(err.message);
+                            res.status(500).send(JSON.stringify({text: "Error override the file"}));
+                        }
+                    });
+                    break;
+            }
+                res.status(200).send(JSON.stringify({text: "User details updated successfully"}));
+            });
+        }
+        else {
+            res.status(400).send(JSON.stringify({text: "Error with request from client"}));
+        }
+    });
 
+    app.get('/favorites/:username', function (req, res) {
+
+        let username = req.params.username;
+        //Validate if logged in?
+
+        fs.readFile(usersFile, 'utf8', function (err, data) {
+            if (err) {
+                res.status(500).send(JSON.stringify({text: "Error while reading the file", favorites: []}));
+            }
+
+            //Our data
+            let obj = JSON.parse(data);
+            let arr = [];
+
+            //Search for the file
+            for (x in obj) {
+                if (obj[x].userName === username) {
+                    arr = obj[x].favorites;
+                    break;
+                }
+            }
+            console.log("server returned " + arr);
+            res.status(200).send(JSON.stringify({text: "Removed", favorites: arr}));
+        });
+    });
 };

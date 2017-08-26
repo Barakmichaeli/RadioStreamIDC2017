@@ -59,8 +59,10 @@ export function Signup(e) {
 
     fetch("http://localhost:8079/register", {
         method: "POST",
-        body: JSON.stringify({username: username[0].value , password: pass[0].value, firstName: firstname[0].value,
-            lastName: lastname[0].value, email: email[0].value}),
+        body: JSON.stringify({
+            username: username[0].value, password: pass[0].value, firstName: firstname[0].value,
+            lastName: lastname[0].value, email: email[0].value
+        }),
         headers: {
             "Content-Type": "application/json"
         },
@@ -85,14 +87,10 @@ export function Signup(e) {
         // error.message //=> String
 
     })
-
-
 }
 
 
 export function Log(e) {
-
-
 
     let username = document.getElementsByClassName('username');
     let pass = document.getElementsByClassName('pass');
@@ -120,7 +118,7 @@ export function Log(e) {
 
     fetch("http://localhost:8079/login", {
         method: "POST",
-        body: JSON.stringify({username: username[0].value , password: pass[0].value}),
+        body: JSON.stringify({username: username[0].value, password: pass[0].value}),
         headers: {
             "Content-Type": "application/json"
         },
@@ -134,7 +132,6 @@ export function Log(e) {
         console.log(response.status)
     }, function (error) {
         // error.message //=> String
-    })
-
-
+    });
 }
+
