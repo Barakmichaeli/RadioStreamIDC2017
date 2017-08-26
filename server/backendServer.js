@@ -222,8 +222,42 @@ module.exports = (PORT) => {
             res.status(200).send(JSON.stringify({text: "Removed"}));
         });
     });
+    app.post('/update', function (req, res) {
+        console.log("Update information request arrived")
+        let username = req.body.username
+        // Check if user is connected
+        if(logedInUsers.username) {
+            console.log('User is logged in...')
+            fs.readFile(usersFile, 'utf8', function (err, data) {
+                if (err) {
+                    res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
+                }
+                let obj = JSON.parse(data);
+                //Search for the file
+                for (currentUser in obj) {
+                    if (obj[currentUser].userName === username) {
+                        obj[currentUser].firstName = req.body.firstName
+                        obj[currentUser].lastName = req.body.lastName
+                        obj[currentUser].email = req.body.email
+                        obj[currentUser].password = req.body.password
+                    }
+                    // Write back updated user details to users file
+                    fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
+                        if (err) {
+                            console.log(err.message);
+                            res.status(500).send(JSON.stringify({text: "Error override the file"}));
+                        }
+                    });
+                    break;
+            }
+                res.status(200).send(JSON.stringify({text: "User details updated successfully"}));
+            });
+        }
+        else {
+            res.status(400).send(JSON.stringify({text: "Error with request from client"}));
+        }
+    });
 
-    // Handling login request
     app.get('/favorites/:username', function (req, res) {
 
         let username = req.params.username;
