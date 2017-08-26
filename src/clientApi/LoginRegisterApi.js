@@ -73,9 +73,19 @@ export function Signup(e) {
         // response.headers    //=> Headers
         // response.url        //=> String
         // return response.text()
-        console.log(response.status)
+        if (response.status === 200) {
+            console.log(response.statusText)
+        } else {
+            response.json().then(function (res) {
+                    document.getElementById("msg").innerHTML =
+                    res.MSG
+            })
+        }
+
+
     }, function (error) {
         // error.message //=> String
+
     })
 }
 
