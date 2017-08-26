@@ -43,41 +43,103 @@ module.exports = (PORT) => {
 
     let usersFile = './usersList.json';
 
-    function authenticationRegister(userName, email, callback) {
+
+    function configureLists() {
+
+        if (!fs.existsSync(usersFile)) {
+            fs.writeFile(usersFile, "[]", function (err) {
+                if (err)
+                    throw Error("Error while creating user list");
+            });
+        }
+    }
+
+    configureLists();
+
+
+    function authenticationRegister(user, callback) {
+
         fs.readFile(usersFile, 'utf8', function (err, data) {
             if (err) {
-                res.status(500).send("Opps, Something went wrong..");
+                callback(false, "error");
             }
-            //Convert the JSON file to apropriate format
+
+            let obj = [];
             if (data.length !== 0) {
-                let text = data.replace(/}{/g, "},{").replace(/^{/, "[{") + "]";
-                //Convert the array json to js array
-                let obj = JSON.parse(text);
+                obj = JSON.parse(data);
+                //IF user exists return with reason
                 for (i in obj) {
-                    if (obj[i].userName === userName ) {
+                    if (obj[i].username === user.username) {
                         callback(false, "user");
                         return;
-                    }else if(obj[i].email === email){
+                    }
+                    if (obj[i].email === user.email) {
                         callback(false, "email");
                         return;
                     }
                 }
             }
+
+            //If user doesnt exist we
+            // add him and return true
+            obj.push(user);
+            let jsonObj = JSON.stringify(obj, null, 2);
+            fs.writeFile(usersFile, jsonObj, function (err) {
+                if (err)
+                    console.log("error");
+            });
             callback(true);
         });
     }
 
-    function authenticationLogin(userName, pass, callback) {
+
+    app.post('/register', function (req, res) {
+
+        let user = {
+            username: req.body.username,
+            pass: req.body.password,
+            first: req.body.firstName,
+            last: req.body.lastName,
+            email: req.body.email
+        };
+        authenticationRegister(user, function (val, reason) {
+
+            //Confirmed
+            if (val) {
+                res.status(200).send({MSG: "ADDED"});
+            }
+            else {
+                let msg = {};
+                switch (reason) {
+                    case "user":
+                        msg = JSON.stringify({MSG: "user name exists"});
+                        res.status(500).send(msg);
+                        break;
+                    case "email":
+                        msg = JSON.stringify({MSG: "email exists"});
+                        res.status(500).send(msg);
+                        break;
+                    default:
+                        msg = JSON.stringify({MSG: "There was a problem"});
+                        res.status(500).send(msg);
+                }
+            }
+        });
+    });
+
+
+    function authenticationLogin(username, pass, callback) {
+
         fs.readFile(usersFile, 'utf8', function (err, data) {
             if (err) {
                 res.status(500).send("Opps, Something went wrong..");
             }
 
             if (data.length !== 0) {
-                let x = data.replace(/}{/g, "},{").replace(/^{/, "[{") + "]";
-                x = JSON.parse(x);
+                let x = JSON.parse(data);
                 for (i in x) {
-                    if (x[i].userName === userName && x[i].password === pass) {
+                    console.log(x[i]);
+                    if (x[i].username === username && x[i].pass === pass) {
                         callback(true);
                         return;
                     }
@@ -87,61 +149,6 @@ module.exports = (PORT) => {
         });
     }
 
-    function configureLists() {
-        fs.appendFile(usersFile, "", function (err) {
-            if (err)
-                throw Error("Error while creating user list");
-        });
-    }
-
-    configureLists();
-
-
-
-    app.post('/register', function (req, res) {
-
-        let name = req.body.username;
-        let pass = req.body.password;
-        let first = req.body.firstName;
-        let last = req.body.lastName;
-        let email = req.body.email;
-
-        authenticationRegister(name, email, function (val, reason) {
-            // If val == true then the user is authentic to register
-
-            if (val) {
-                let obj = {
-                    userName: name, password: pass, firstName: first, lastName: last,
-                    email: email
-                };
-                let jsonObj = JSON.stringify(obj, null, 2);
-                //     Callback when created
-                fs.appendFile(usersFile, jsonObj, function (err) {
-                    if (err) {
-                        res.status(500).send("error");
-                        return;
-                    }
-                });
-                res.status(200).send("OK");
-            } else {
-                let msg = {};
-                switch(reason){
-                    case "user":
-                        msg = JSON.stringify({MSG : "user name exists"});
-                        res.status(500).send(msg);
-                        break;
-                    case "email":
-                        msg = JSON.stringify({MSG : "email exists"});
-                        res.status(500).send(msg);
-                        break;
-                    default:
-                        msg = JSON.stringify({MSG : "There was a problem"});
-                        res.status(500).send(msg);
-                }
-
-            }
-        });
-    });
 
     // Handling login request
     app.post('/login', function (req, res) {
@@ -169,7 +176,7 @@ module.exports = (PORT) => {
                 }
                 res.status(200).send("OK");
             } else {
-                res.status(500).send("Opps, The user doesnt exist ");
+                res.status(500).send("exist");
             }
         });
     });
@@ -196,7 +203,7 @@ module.exports = (PORT) => {
                     //add to the favorite lists
                     fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
                         if (err) {
-                            console.log(err.message)
+                            console.log(err.message);
                             res.status(500).send(JSON.stringify({text: "Error override the file"}));
                         }
                         ;
@@ -247,8 +254,6 @@ module.exports = (PORT) => {
     });
 
 
-
-
     app.post('/update', function (req, res) {
         console.log("Update information request arrived");
         console.log(req.cookies);
@@ -257,60 +262,43 @@ module.exports = (PORT) => {
         let userName = req.body.userName;
 
         // Check if user is connected
-        if(logedInUsers.username) {
-        console.log('User is logged in...');
-        fs.readFile(usersFile, 'utf8', function (err, data) {
-            if (err) {
-                res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
-            }
-            let obj = JSON.parse(data);
-
-            console.log(obj);
-            //Search for the file
-            for (x in obj) {
-                console.log("looping");
-                if (obj[x].userName === userName) {
-                    obj[x].firstName = req.body.firstName;
-                    obj[x].lastName = req.body.lastName;
-                    obj[x].email = req.body.email;
-                    obj[x].password = req.body.password;
-
-                    console.log(obj);
-                    // Write back updated user details to users file
-                    fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
-                        if (err) {
-                            console.log(err.message);
-                            res.status(500).send(JSON.stringify({text: "Error override the file"}));
-                        }
-                    });
-                    break;
+        if (logedInUsers.username) {
+            console.log('User is logged in...');
+            fs.readFile(usersFile, 'utf8', function (err, data) {
+                if (err) {
+                    res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
                 }
-            }
-            res.status(200).send(JSON.stringify({text: "User details updated successfully"}));
-        });
+                let obj = JSON.parse(data);
+
+                console.log(obj);
+                //Search for the file
+                for (x in obj) {
+                    console.log("looping");
+                    if (obj[x].userName === userName) {
+                        obj[x].firstName = req.body.firstName;
+                        obj[x].lastName = req.body.lastName;
+                        obj[x].email = req.body.email;
+                        obj[x].password = req.body.password;
+
+                        console.log(obj);
+                        // Write back updated user details to users file
+                        fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
+                            if (err) {
+                                console.log(err.message);
+                                res.status(500).send(JSON.stringify({text: "Error override the file"}));
+                            }
+                        });
+                        break;
+                    }
+                }
+                res.status(200).send(JSON.stringify({text: "User details updated successfully"}));
+            });
         }
         else {
-        // User Doesnt logged in
-        res.status(400).send(JSON.stringify({text: "Error with request from client"}));
+            // User Doesnt logged in
+            res.status(400).send(JSON.stringify({text: "Error with request from client"}));
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     app.get('/favorites/:username', function (req, res) {

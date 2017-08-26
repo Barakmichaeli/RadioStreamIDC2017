@@ -36,7 +36,10 @@ class Register extends Component {
                     <br/> <br/>
                     <h3>Retype password:</h3>
                     <input className="re-pass" type="password" placeholder="Eight valid characters "/>
-                    <h5 id="msg"></h5>
+                    <br/>
+
+                    <h5 id="msg"> </h5>
+
                     <button onClick={ (e) => {
                         Signup(e);
                     }}> Sign me up!

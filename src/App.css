@@ -79,6 +79,7 @@ input {
 }
 
 button {
+    margin-top: 10px;
     font-family: 'HP Simplified Light', cursive;
     font-size: 18px;
     height: 30px;

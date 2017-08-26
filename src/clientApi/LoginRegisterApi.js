@@ -19,43 +19,71 @@ export function Signup(e) {
     let email = document.getElementsByClassName('email');
     let pass = document.getElementsByClassName('pass');
     let repass = document.getElementsByClassName('re-pass');
+    let flag = false;
+
 
     if (username[0].value.length < 4) {
         username[0].style.borderColor = "red";
         username[0].placeholder = 'Enter User Name';
+        flag = true;
     } else {
         username[0].style.borderColor = "white";
     }
-    if (firstname[0].value.length < 4) {
+
+    if (firstname[0].value.length === 0) {
         firstname[0].style.borderColor = "red";
         firstname[0].placeholder = 'Enter First Name';
+        flag = true;
     } else {
         firstname[0].style.borderColor = "white";
     }
-    if (lastname[0].value.length < 4) {
+
+
+    if (lastname[0].value.length === 0) {
         lastname[0].style.borderColor = "red";
         lastname[0].placeholder = 'Enter Last Name';
+        flag = true;
     } else {
         lastname[0].style.borderColor = "white";
     }
+
+
     if (!validateEmail(email[0].value)) {
         email[0].style.borderColor = "red";
         email[0].placeholder = 'Enter Valid Mail';
+        flag = true;
     } else {
         email[0].style.borderColor = "white";
     }
+
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
         pass[0].placeholder = 'Enter Password';
+        flag = true;
     } else {
         pass[0].style.borderColor = "white";
     }
+
+
     if (repass[0].value.length < 8) {
         repass[0].style.borderColor = "red";
         repass[0].placeholder = 'Enter Password';
+        flag = true;
     } else {
         repass[0].style.borderColor = "white";
     }
+
+    if (repass[0].value !== pass[0].value) {
+        document.getElementById("msg").innerHTML = "Passwords do not match";
+        flag = true;
+    } else {
+        document.getElementById("msg").innerHTML = "";
+    }
+
+    if (flag)
+        return;
+
+    let self = this;
 
     fetch("http://localhost:8079/register", {
         method: "POST",
@@ -68,20 +96,20 @@ export function Signup(e) {
         },
         credentials: "same-origin"
     }).then(function (response) {
-        // response.status     //=> number 100–599
-        // response.statusText //=> String
-        // response.headers    //=> Headers
-        // response.url        //=> String
-        // return response.text()
+        console.log(response.status);
+
+
         if (response.status === 200) {
-            console.log(response.statusText)
+            //Just back to login
+            console.log("here!!!!");
+            self.context.router.push('/login');
+
         } else {
             response.json().then(function (res) {
-                    document.getElementById("msg").innerHTML =
-                    res.MSG
+                document.getElementById("msg").innerHTML =
+                    res.MSG;
             })
         }
-
 
     }, function (error) {
         // error.message //=> String
@@ -111,10 +139,8 @@ export function Log(e) {
     } else {
         pass[0].style.borderColor = "white";
     }
-
     if (flag)
         return;
-
 
     fetch("http://localhost:8079/login", {
         method: "POST",
@@ -124,7 +150,11 @@ export function Log(e) {
         },
         credentials: "same-origin"
     }).then(function (response) {
-        console.log(response);
+        if (response.status === 200)
+            console.log("Log in!!");
+        else
+            console.log("Cant find the user..");
+
     }, function (error) {
         console.log(error.message);
     });
