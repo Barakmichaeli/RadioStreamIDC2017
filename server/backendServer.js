@@ -40,7 +40,7 @@ module.exports = (PORT) => {
 
     let usersFile = './usersList.json';
 
-    function authenticationRegister(userName, callback) {
+    function authenticationRegister(userName, email, callback) {
         fs.readFile(usersFile, 'utf8', function (err, data) {
             if (err) {
                 res.status(500).send("Opps, Something went wrong..");
@@ -51,8 +51,11 @@ module.exports = (PORT) => {
                 //Convert the array json to js array
                 let obj = JSON.parse(text);
                 for (i in obj) {
-                    if (obj[i].userName === userName) {
-                        callback(false);
+                    if (obj[i].userName === userName ) {
+                        callback(false, "user");
+                        return;
+                    }else if(obj[i].email === email){
+                        callback(false, "email");
                         return;
                     }
                 }
@@ -98,8 +101,9 @@ module.exports = (PORT) => {
         let last = req.body.lastName;
         let email = req.body.email;
 
-        authenticationRegister(name, function (val) {
+        authenticationRegister(name, email, function (val, reason) {
             // If val == true then the user is authentic to register
+
             if (val) {
                 let obj = {userName: name, password: pass ,firstName: first, lastName: last,
                     email: email};
@@ -113,7 +117,21 @@ module.exports = (PORT) => {
                 });
                 res.status(200).send("OK");
             } else {
-                res.status(500).send("exists");
+                let msg = {};
+                switch(reason){
+                    case "user":
+                        msg = JSON.stringify({MSG : "user name exists"});
+                        res.status(500).send(msg);
+                        break;
+                    case "email":
+                        msg = JSON.stringify({MSG : "email exists"});
+                        res.status(500).send(msg);
+                        break;
+                    default:
+                        msg = JSON.stringify({MSG : "There was a problem"});
+                        res.status(500).send(msg);
+                }
+
             }
         });
     });
@@ -138,7 +156,7 @@ module.exports = (PORT) => {
                         maxAge: 1000 * 60 * 60, // would expire after 60 minutes
                         httpOnly: true, // The cookie only accessible by the web server
                         // signed: true // Indicates if the cookie should be signed
-                    }
+                    };
                     res.cookie('uid', UIDcountrer, options);
                 }
                 res.status(200).send("OK");
