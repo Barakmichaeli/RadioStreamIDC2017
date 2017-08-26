@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 // import {isLoggedIn} from './ServerApi'
 import Main from './components/Main';
+import Favorites from './components/Favorites';
 import './App.css'
 
 

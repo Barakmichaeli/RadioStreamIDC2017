@@ -34,7 +34,7 @@ export  default class Personal extends Component {
                     <input className="pass" type="password" placeholder="Eight valid characters "/>
                     <br/> <br/>
                     <h3>Retype password:</h3>
-                    <input className="re-pass" type="password" placeholder="Password again"/>
+                    <input  className="re-pass" type="password" placeholder="Password again"/>
                     <br/> <br/>
                     <button onClick={ (e) => {
                         updateData(e);

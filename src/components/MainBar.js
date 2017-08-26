@@ -101,7 +101,6 @@ class MainBar extends Component {
                 </div>
                 <table>
                     <tbody>
-
                     <tr>
                         <Link to="/main/personal" onClick={() => {
                             this.setColor("personal");
@@ -121,7 +120,7 @@ class MainBar extends Component {
                         </Link>
 
 
-                        <Link to="/main" onClick={() => {
+                        <Link to="/main/home" onClick={() => {
                             this.setColor("home");
                         }}>
                             <td id="home">
@@ -136,7 +135,6 @@ class MainBar extends Component {
                                 RadioStream team
                             </td>
                         </Link>
-
                     </tr>
                     </tbody>
                 </table>

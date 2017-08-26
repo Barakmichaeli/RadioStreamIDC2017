@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import ListItem from './ListItem';
 import stations from './stationsUrls';
+import {getFavorites} from '../clientApi/LoginRegisterApi';
 
 class Home extends Component {
 
@@ -15,16 +16,25 @@ class Home extends Component {
         }
     }
 
-
     generateList() {
+
+        // let username = "barak";
         let arr = [];
-        for (let i = 0; i < stations.length; i++)
-            arr.push(<ListItem setStation={this.setStation.bind(this)}
+        let favorites = [];
+
+        //generate list
+        for (let i = 0; i < stations.length; i++){
+            let status = (favorites.includes(stations[i][1]));
+            arr.push(<ListItem playStation={this.playStation.bind(this)}
+                               favorite={status}
+                               currentStation={this.state.currentStation}
+                               mode={"Home"}
                                station={stations[i]}/>);
+        }
         return arr;
     }
 
-    setStation(station) {
+    playStation(station) {
         this.setState({
             currentStation: station
         });
@@ -36,10 +46,8 @@ class Home extends Component {
 
 
     render() {
-        console.log("OK");
         return (
             <div id="home" className="main-block home">
-
 
                 <div className="home-title">
                     <h1>RadioStream</h1>
