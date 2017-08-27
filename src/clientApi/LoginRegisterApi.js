@@ -150,7 +150,7 @@ export function Log(e) {
             history.push('/main/home');
         else
             console.log("Cant find the user..");
-            document.getElementById("msg").innerHTML = "The user doesn't exist";
+            document.getElementById("msg").innerHTML = "The user doesn't exist or the password is incorrect";
 
     }, function (error) {
         console.log(error.message);

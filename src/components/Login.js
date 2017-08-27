@@ -21,7 +21,9 @@ class Login extends Component {
                     <br/> <br/>
                     <h3>Password:</h3>
                     <input className="pass form-control" type="password" placeholder="********"/>
-                    <br/> <br/>
+                    <br/><br/>
+                    <h5 id="msg"> </h5>
+                    <br/>
                     <button  onClick={ (e) =>{
                         Log(e);
                         //Redirect to main
@@ -30,7 +32,7 @@ class Login extends Component {
                     <br/>
                     <Link to={"/register"}><input type="button" value="Go to Signup!"/></Link>
                     <br/> <br/>
-                    <h5 id="msg"> </h5>
+
                 </div>
             </div>
         )
