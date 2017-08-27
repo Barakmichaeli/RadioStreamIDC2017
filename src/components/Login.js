@@ -20,7 +20,7 @@ class Login extends Component {
                     <input type="text" className="username" placeholder="Username"/>
                     <br/> <br/>
                     <h3>Password:</h3>
-                    <input className="pass form-control" type="password" placeholder="Your Password #########"/>
+                    <input className="pass form-control" type="password" placeholder="********"/>
                     <br/> <br/>
                     <button  onClick={ (e) =>{
                         Log(e);
@@ -29,6 +29,8 @@ class Login extends Component {
                     </button>
                     <br/>
                     <Link to={"/register"}><input type="button" value="Go to Signup!"/></Link>
+                    <br/> <br/>
+                    <h5 id="msg"> </h5>
                 </div>
             </div>
         )

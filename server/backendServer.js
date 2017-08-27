@@ -193,7 +193,6 @@ module.exports = (PORT) => {
                 res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
             }
             //Our data
-            console.log(station);
             let obj = JSON.parse(data);
 
             //Search for the file
@@ -206,10 +205,8 @@ module.exports = (PORT) => {
                             console.log(err.message);
                             res.status(500).send(JSON.stringify({text: "Error override the file"}));
                         }
-                        ;
                         console.log('file saved');
                     });
-                    break;
                 }
             }
             res.status(200).send(JSON.stringify({text: "Added"}));
@@ -255,11 +252,10 @@ module.exports = (PORT) => {
 
 
     app.post('/update', function (req, res) {
-        console.log("Update information request arrived");
-        console.log(req.cookies);
 
         //Constant user name
         let userName = req.body.userName;
+
 
         // Check if user is connected
         if (logedInUsers.username) {
@@ -280,7 +276,6 @@ module.exports = (PORT) => {
                         obj[x].email = req.body.email;
                         obj[x].password = req.body.password;
 
-                        console.log(obj);
                         // Write back updated user details to users file
                         fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
                             if (err) {

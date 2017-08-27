@@ -1,12 +1,10 @@
-/**
- * Created by barak on 14/08/2017.
- */
-import {Router, Route, Redirect} from 'react-router'
-import {BrowserRouter, Switch} from 'react-router-dom'
+import {Route, Redirect} from 'react-router'
+import {Switch , Router } from 'react-router-dom'
+import history from './components/history';
+
 import React, {Component} from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
-// import {isLoggedIn} from './ServerApi'
 import Main from './components/Main';
 import './App.css'
 let loggedIn = false;
@@ -15,14 +13,12 @@ let loggedIn = false;
 export default class Routing extends Component {
 
 
-
     render() {
-        console.log("In routing");
         return (
-            <BrowserRouter>
+            <Router  history={history} >
                 {(loggedIn)?
                     <Switch>
-                        <Route path="/main" component={Main}/>
+                        <Route path="/main"  component={Main}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/register" component={Register}/>
                         {/*handle not found*/}
@@ -36,7 +32,7 @@ export default class Routing extends Component {
                         <Redirect from="*" to="/login"/>
                     </Switch>
                 }
-            </BrowserRouter>
+            </Router >
         )
     }
 }

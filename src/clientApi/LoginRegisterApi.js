@@ -3,6 +3,7 @@
  */
 
 import 'whatwg-fetch';
+import history from '../components/history';
 
 function validateEmail(email) {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -96,14 +97,9 @@ export function Signup(e) {
         },
         credentials: "same-origin"
     }).then(function (response) {
-        console.log(response.status);
-
 
         if (response.status === 200) {
-            //Just back to login
-            console.log("here!!!!");
-            self.context.router.push('/login');
-
+            history.push('/login');
         } else {
             response.json().then(function (res) {
                 document.getElementById("msg").innerHTML =
@@ -151,9 +147,10 @@ export function Log(e) {
         credentials: "same-origin"
     }).then(function (response) {
         if (response.status === 200)
-            console.log("Log in!!");
+            history.push('/main/home');
         else
             console.log("Cant find the user..");
+            document.getElementById("msg").innerHTML = "The user doesn't exist";
 
     }, function (error) {
         console.log(error.message);
