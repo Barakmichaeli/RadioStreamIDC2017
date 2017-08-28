@@ -4,7 +4,7 @@
   "description": "Boilerplate for kick starting a React Project with ES6 (Babel) and Hot reloader using Webpack.",
   "main": "index.js",
   "scripts": {
-    "start": "node mainModule.js --hot",
+    "start": "node app.js --hot",
     "dev": "webpack-dev-server --progress --colors --hot --config ./webpack.config.js ",
     "build": "cross-env BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.production.js"
   },
