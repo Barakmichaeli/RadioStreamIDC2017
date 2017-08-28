@@ -13,9 +13,13 @@ body {
     font-family: 'HP Simplified Light', cursive;
 }
 
-h1, h2, h3, h4, h5, h6, a {
+h1, h2, h3, h4, h6, a {
     margin: 0;
     padding: 0;
+}
+
+h5{
+    color: red;
 }
 
 
