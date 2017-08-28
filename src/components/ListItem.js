@@ -17,15 +17,19 @@ class ListItem extends Component {
 
 
     addFavorite() {
-        //Get user information
-
-
-
-        //update favorites in server
         let self = this;
+        let username = sessionStorage.getItem("username");
+        let station = this.state.station[1];
+
+        //Add to the session also
+        let favorites = JSON.parse(sessionStorage.getItem("favorites"));
+        favorites.push(station);
+        sessionStorage.setItem("favorites" , JSON.stringify(favorites));
+
+        //update  in server
         fetch("http://localhost:8079/addFavorite", {
             method: "POST",
-            body: JSON.stringify({station: this.state.station[1], username: "barak"}),
+            body: JSON.stringify({station: station ,  username: username }),
             headers: {
                 "Content-Type": "application/json"
             },
@@ -44,15 +48,21 @@ class ListItem extends Component {
     }
 
     removeFavorite(mode) {
-        //Get user information
 
+        let username = sessionStorage.getItem("username");
+        let station = this.state.station[1];
 
+        //Update the session information
+        let favorites = JSON.parse(sessionStorage.getItem("favorites"));
+        let index = favorites.indexOf(station);
+        favorites.splice(index, 1);
+        sessionStorage.setItem("favorites", JSON.stringify(favorites));
 
         //update favorites in server
         let self = this;
         fetch("http://localhost:8079/removeFavorite", {
             method: "POST",
-            body: JSON.stringify({station: this.state.station[1], username: "barak"}),
+            body: JSON.stringify({station: station, username: username}),
             headers: {
                 "Content-Type": "application/json"
             },

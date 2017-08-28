@@ -11,17 +11,16 @@ export  default class Personal extends Component {
 
         super(props);
         this.state = {
-            username: "Barak",
-            firstname: "Barak",
-            lastname: "Michaeli",
-            email: "barak6546@gmail.com"
+            username: sessionStorage.getItem("username"),
+            firstname: sessionStorage.getItem("first"),
+            lastname: sessionStorage.getItem("last"),
+            email: sessionStorage.getItem("email")
         }
         this.updateInput.bind(this);
     }
 
 
     updateInput(e) {
-        console.log(e.target.className);
         this.setState({
             [e.target.className]: e.target.value
         });
@@ -53,18 +52,18 @@ export  default class Personal extends Component {
                     <h3>Last Name:</h3>
                     <input className="lastname" type="text" placeholder="Last Name"
                            value={this.state.lastname}
-                           onChange={(e)=>{
+                           onChange={(e) => {
                                this.updateInput(e);
                            }}/>
                     <br/> <br/>
                     <h3>Email:</h3>
                     <input className="email" type="email" placeholder="Email"
                            value={this.state.email}
-                           onChange={(e)=>{
+                           onChange={(e) => {
                                this.updateInput(e);
                            }}/>
                     <br/> <br/>
-                    <h3>Password:</h3>
+                    <h3>New password:</h3>
                     <input className="pass" type="password" placeholder="New Password"/>
                     <br/> <br/>
 
@@ -77,7 +76,7 @@ export  default class Personal extends Component {
                     </button>
                     <br/>
                     <br/>
-                    <h3 className="update-message">  </h3>
+                    <h3 className="update-message"></h3>
                 </div>
             </div>
         )

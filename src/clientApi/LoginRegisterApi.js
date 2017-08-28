@@ -142,16 +142,26 @@ export function Log(e) {
         method: "POST",
         body: JSON.stringify({username: username[0].value, password: pass[0].value}),
         headers: {
+            Accept: 'application/json',
             "Content-Type": "application/json"
         },
         credentials: "same-origin"
     }).then(function (response) {
-        if (response.status === 200)
-            history.push('/main/home');
-        else
-            console.log("Cant find the user..");
-            document.getElementById("msg").innerHTML = "The user doesn't exist";
+        response.json().then(function (user) {
+            //Save user data in the browser session
+            sessionStorage.setItem("username", user.username);
+            sessionStorage.setItem("first", user.first);
+            sessionStorage.setItem("last", user.last);
+            sessionStorage.setItem("email", user.email);
+            sessionStorage.setItem("favorites", JSON.stringify(user.favorites));
 
+            if (response.status === 200) {
+                history.push('/home/stations');
+            }
+            else {
+                document.getElementById("msg").innerHTML = "The user doesn't exist";
+            }
+        })
     }, function (error) {
         console.log(error.message);
     });
@@ -173,55 +183,62 @@ export function updateData(e) {
         firstname[0].style.borderColor = "red";
         firstname[0].placeholder = 'Enter First Name';
         flag = true;
-    } else {
+    } else
         firstname[0].style.borderColor = "white";
-    }
+
     if (lastname[0].value.length < 4) {
         lastname[0].style.borderColor = "red";
         lastname[0].placeholder = 'Enter Last Name';
         flag = true;
-    } else {
+    } else
         lastname[0].style.borderColor = "white";
-    }
+
+
     if (!validateEmail(email[0].value)) {
         email[0].style.borderColor = "red";
         email[0].placeholder = 'Enter Valid Mail';
         flag = true;
-    } else {
+    } else
         email[0].style.borderColor = "white";
-    }
-
 
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
         flag = true;
-    } else {
+    } else
         pass[0].style.borderColor = "white";
-    }
+
 
     if (repass[0].value.length < 8) {
         repass[0].style.borderColor = "red";
         flag = true;
-    } else {
+    } else
         repass[0].style.borderColor = "white";
-    }
+
 
     if (repass[0].value !== pass[0].value) {
         document.getElementsByClassName("update-message")[0].innerHTML = "Passwords do not match";
         flag = true;
-    } else {
+    } else
         document.getElementsByClassName("update-message")[0].innerHTML = "";
-    }
+
     if (flag)
         return;
 
+    //update session
+    sessionStorage.setItem("username", username[0].value);
+    sessionStorage.setItem("first", firstname[0].value);
+    sessionStorage.setItem("last", lastname[0].value);
+    sessionStorage.setItem("email", email[0].value);
+
+
+    //update server
     fetch("http://localhost:8079/update", {
         method: "POST",
         body: JSON.stringify({
-            userName: username[0].value,
-            password: pass[0].value,
-            firstName: firstname[0].value,
-            lastName: lastname[0].value,
+            username: username[0].value,
+            pass: pass[0].value,
+            first: firstname[0].value,
+            last: lastname[0].value,
             email: email[0].value
         }),
         headers: {
@@ -237,15 +254,9 @@ export function updateData(e) {
             else {
                 document.getElementsByClassName("update-message")[0].innerHTML = "Opps.. something went wrong, please try again later";
             }
-            // response.status     //=> number 100–599
-            // response.statusText //=> String
-            // response.headers    //=> Headers
-            // response.url        //=> String
-            // return response.text()
         });
     }, function (error) {
         console.log(error);
-        // error.message //=> String
     })
 }
 

@@ -18,10 +18,10 @@ class Main extends Component {
             <div className="container-home">
                 <MainBar/>
                 <Switch>
-                    <Route exact path="/main/home" component={Home}/>
-                    <Route exact path="/main/favorites" component={Favorites}/>
-                    <Route exact path="/main/personal" component={Personal}/>
-                    <Route exact path="/main/team" component={Team}/>
+                    <Route exact path="/home/stations" component={Home}/>
+                    <Route exact path="/home/favorites" component={Favorites}/>
+                    <Route exact path="/home/personal" component={Personal}/>
+                    <Route exact path="/home/team" component={Team}/>
                 </Switch>
             </div>
         )

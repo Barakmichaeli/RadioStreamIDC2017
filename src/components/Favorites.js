@@ -21,17 +21,19 @@ class Favorites extends Component {
 
         let arr = [];
         //Get the favorites from server!
+        let favorites = JSON.parse(sessionStorage.getItem("favorites"));
 
+        favorites = stations.filter((station) => {
+            return favorites.includes(station[1]);
+        });
 
-
-
-        for (let i = 0; i < stations.length; i++)
+        for (let i = 0; i < favorites.length; i++)
             arr.push(<ListItem playStation={this.playStation.bind(this)}
                                favorite={true}
-                               currentStation = {this.state.currentStation}
+                               currentStation={this.state.currentStation}
                                updateFavorites={this.updateFavorites(this)}
                                mode={"Favorites"}
-                               station={stations[i]}/>);
+                               station={favorites[i]}/>);
         return arr;
     }
 

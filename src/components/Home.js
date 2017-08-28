@@ -18,9 +18,8 @@ class Home extends Component {
 
     generateList() {
 
-        // let username = "barak";
         let arr = [];
-        let favorites = [];
+        let favorites = sessionStorage.getItem("favorites");
 
         //generate list
         for (let i = 0; i < stations.length; i++){
@@ -29,7 +28,8 @@ class Home extends Component {
                                favorite={status}
                                currentStation={this.state.currentStation}
                                mode={"Home"}
-                               station={stations[i]}/>);
+                               station={stations[i]}
+                               key = {stations[i][1]} />);
         }
         return arr;
     }

@@ -2,7 +2,6 @@
  * Created by barak on 18/08/2017.
  */
 
-
 module.exports = (PORT) => {
 
     let express = require("express");
@@ -79,7 +78,6 @@ module.exports = (PORT) => {
                     }
                 }
             }
-
             //If user doesnt exist we
             // add him and return true
             obj.push(user);
@@ -100,7 +98,8 @@ module.exports = (PORT) => {
             pass: req.body.password,
             first: req.body.firstName,
             last: req.body.lastName,
-            email: req.body.email
+            email: req.body.email,
+            favorites: []
         };
         authenticationRegister(user, function (val, reason) {
 
@@ -129,7 +128,6 @@ module.exports = (PORT) => {
 
 
     function authenticationLogin(username, pass, callback) {
-
         fs.readFile(usersFile, 'utf8', function (err, data) {
             if (err) {
                 res.status(500).send("Opps, Something went wrong..");
@@ -138,9 +136,8 @@ module.exports = (PORT) => {
             if (data.length !== 0) {
                 let x = JSON.parse(data);
                 for (i in x) {
-                    console.log(x[i]);
                     if (x[i].username === username && x[i].pass === pass) {
-                        callback(true);
+                        callback(true, x[i]);
                         return;
                     }
                 }
@@ -153,20 +150,28 @@ module.exports = (PORT) => {
     // Handling login request
     app.post('/login', function (req, res) {
 
-        let name = req.body.username;
+        let username = req.body.username;
         let pass = req.body.password;
 
-        authenticationLogin(name, pass, function (val) {
-            //Exist
+        authenticationLogin(username, pass, function (val, user) {
+
             if (val) {
-                let uid = logedInUsers[name];
+                let userInformation = {
+                    username: user.username,
+                    first: user.first,
+                    last: user.last,
+                    email: user.email,
+                    favorites: user.favorites
+                };
+                let uid = logedInUsers[username];
                 //Already logged in
                 if (uid) { // Return his UID
                     res.cookie('uid', uid);
                 } else {
+                    //If not logged in return this
                     UIDcountrer++;
-                    logedInUsers[name] = UIDcountrer;
-                    logedInUsersTag[UIDcountrer] = name;
+                    logedInUsers[username] = UIDcountrer;
+                    logedInUsersTag[UIDcountrer] = username;
                     let options = {
                         maxAge: 1000 * 60 * 60, // would expire after 60 minutes
                         httpOnly: true, // The cookie only accessible by the web server
@@ -174,19 +179,18 @@ module.exports = (PORT) => {
                     };
                     res.cookie('uid', UIDcountrer, options);
                 }
-                res.status(200).send("OK");
+                res.status(200).send(JSON.stringify(userInformation));
             } else {
-                res.status(500).send("exist");
+                res.status(500).send(JSON.stringify("Not found"));
             }
         });
     });
+
 
     app.post('/addFavorite', function (req, res) {
 
         let username = req.body.username;
         let station = req.body.station;
-        let action = req.body.status;
-        //Validate if logged in?
 
         fs.readFile(usersFile, 'utf8', function (err, data) {
             if (err) {
@@ -197,9 +201,8 @@ module.exports = (PORT) => {
 
             //Search for the file
             for (x in obj) {
-                if (obj[x].userName === username) {
+                if (obj[x].username === username) {
                     obj[x].favorites.push(station);
-                    //add to the favorite lists
                     fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
                         if (err) {
                             console.log(err.message);
@@ -218,7 +221,6 @@ module.exports = (PORT) => {
 
         let username = req.body.username;
         let station = req.body.station;
-        //Validate if logged in?
 
         fs.readFile(usersFile, 'utf8', function (err, data) {
             if (err) {
@@ -230,7 +232,7 @@ module.exports = (PORT) => {
 
             //Search for the file
             for (x in obj) {
-                if (obj[x].userName === username) {
+                if (obj[x].username === username) {
                     if (obj[x].favorites.includes(station)) {
                         let index = obj[x].favorites.indexOf(station);
                         obj[x].favorites.splice(index, 1);
@@ -254,27 +256,23 @@ module.exports = (PORT) => {
     app.post('/update', function (req, res) {
 
         //Constant user name
-        let userName = req.body.userName;
-
+        let username = req.body.username;
 
         // Check if user is connected
-        if (logedInUsers.username) {
-            console.log('User is logged in...');
+        if (logedInUsers[username]) {
+
             fs.readFile(usersFile, 'utf8', function (err, data) {
                 if (err) {
                     res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
                 }
                 let obj = JSON.parse(data);
-
-                console.log(obj);
                 //Search for the file
                 for (x in obj) {
-                    console.log("looping");
-                    if (obj[x].userName === userName) {
-                        obj[x].firstName = req.body.firstName;
-                        obj[x].lastName = req.body.lastName;
+                    if (obj[x].username === username) {
+                        obj[x].first = req.body.first;
+                        obj[x].last = req.body.last;
                         obj[x].email = req.body.email;
-                        obj[x].password = req.body.password;
+                        obj[x].pass = req.body.pass;
 
                         // Write back updated user details to users file
                         fs.writeFile(usersFile, JSON.stringify(obj), function (err) {

@@ -104,13 +104,15 @@ class MainBar extends Component {
                 <table>
                     <tbody>
                     <tr>
-                        <Link to="/login">
+                        <Link to="/login" onClick={() => {
+                            sessionStorage.clear();
+                        }}>
                             <td id="logout">
-                                logout
+                                Logout
                             </td>
                         </Link>
 
-                        <Link to="/main/personal" onClick={() => {
+                        <Link to="/home/personal" onClick={() => {
                             this.setColor("personal");
                         }}>
                             <td id="personal">
@@ -119,7 +121,7 @@ class MainBar extends Component {
                         </Link>
 
 
-                        <Link to="/main/favorites" onClick={(e) => {
+                        <Link to="/home/favorites" onClick={(e) => {
                             this.setColor("favorites");
                         }}>
                             <td id="favorites">
@@ -128,7 +130,7 @@ class MainBar extends Component {
                         </Link>
 
 
-                        <Link to="/main/home" onClick={() => {
+                        <Link to="/home/stations" onClick={() => {
                             this.setColor("home");
                         }}>
                             <td id="home">
@@ -136,7 +138,7 @@ class MainBar extends Component {
                             </td>
                         </Link>
 
-                        <Link to="/main/team" onClick={() => {
+                        <Link to="/home/team" onClick={() => {
                             this.setColor("team");
                         }}>
                             <td id="team" style={{borderRightColor: "#000000"}}>

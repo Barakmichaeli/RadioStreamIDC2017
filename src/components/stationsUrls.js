@@ -14,5 +14,6 @@ module.exports = [
     ["http://213.8.143.168:80/91fmAudio", "Lev Hamedina" , "http://www.91fm.co.il"],
     ["http://102.livecdn.biz/102fm_aac", "102fm" , "http://www.102fm.co.il/"],
     ["http://213.8.143.168:80/100fmAudio", "100fm" , "http://www.100fm.co.il/"],
-
+    ["http://101.cdnwz.net/101fm", "Radio Jerusalem" , "https://www.facebook.com/radiojerusalem"],
+    ["http://radiocast-rr-d.vidnt.com/ipbc_IPBC88LAM", "88FM" , "http://www.kan.org.il/live/radio.aspx?stationId=4"]
 ];
