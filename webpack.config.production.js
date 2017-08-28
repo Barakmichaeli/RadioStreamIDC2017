@@ -48,36 +48,50 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: './scripts/index',
-  output: {
-    path: path.join(__dirname, 'static'),
-    filename: 'bundle.js',
-    publicPath: '/'
-  },
-  resolve: {
-    extensions: ['', '.js']
-  },
-  devtool: 'source-map',
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ],
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: ['babel'],
-        include: path.join(__dirname, 'scripts')
-      }
-    ]
-  }
+    entry: './src/index',
+    output: {
+        path: path.join(__dirname, 'static'),
+        filename: 'bundle.js',
+        publicPath: '/'
+    },
+    resolve: {
+        extensions: ['', '.js']
+    },
+    devtool: 'source-map',
+    plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
+    ],
+    module: {
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                loaders: ['babel'],
+                include: path.join(__dirname, 'src')
+            }, {
+                test: /\.css$/,
+                loaders: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(?:png|jpg|svg)$/,
+                loader: 'url-loader',
+                query: {
+                    // Inline images smaller than 10kb as data URIs
+                    // limit: 10000
+                }
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            }]
+    }
 };
