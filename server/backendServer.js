@@ -200,13 +200,14 @@ module.exports = (PORT) => {
 
     app.get('/connection', function (req, res, next) {
 
+        let username = logedInUsersTag[req.cookies.uid];
+
         //If connected return other uid and movev foward
-        if (logedInUsersTag[req.cookies.uid]) {
+        if (username) {
 
             console.log("User is connected!");
 
             //Set New cookie
-            let username = logedInUsersTag[req.cookies.uid];
             UIDcountrer++;
             logedInUsers[username] = UIDcountrer;
             delete logedInUsersTag[req.cookies.uid];
@@ -289,7 +290,7 @@ module.exports = (PORT) => {
                             console.log(err.message);
                             res.status(500).send(JSON.stringify({text: "Error override the file"}));
                         }
-                        ;
+
                     });
                     break;
                 }
