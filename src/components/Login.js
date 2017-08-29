@@ -21,9 +21,8 @@ class Login extends Component {
                     <br/><br/>
                     <h5 id="msg"> </h5>
                     <br/>
-                    <button  onClick={ (e) =>{
+                    <button onClick={ (e) => {
                         Log(e);
-                        //Redirect to main
                     }}> Login
                     </button>
                     <br/>

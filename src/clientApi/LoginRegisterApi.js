@@ -1,9 +1,6 @@
-/**
- * Created by barak on 18/08/2017.
- */
-
 import 'whatwg-fetch';
 import history from '../components/history';
+
 
 function validateEmail(email) {
     let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -13,7 +10,6 @@ function validateEmail(email) {
 
 export function Signup(e) {
 
-    // console.log(e);
     let username = document.getElementsByClassName('username');
     let firstname = document.getElementsByClassName('firstname');
     let lastname = document.getElementsByClassName('lastname');
@@ -21,7 +17,6 @@ export function Signup(e) {
     let pass = document.getElementsByClassName('pass');
     let repass = document.getElementsByClassName('re-pass');
     let flag = false;
-
 
     if (username[0].value.length < 4) {
         username[0].style.borderColor = "red";
@@ -39,7 +34,6 @@ export function Signup(e) {
         firstname[0].style.borderColor = "white";
     }
 
-
     if (lastname[0].value.length === 0) {
         lastname[0].style.borderColor = "red";
         lastname[0].placeholder = 'Enter Last Name';
@@ -47,7 +41,6 @@ export function Signup(e) {
     } else {
         lastname[0].style.borderColor = "white";
     }
-
 
     if (!validateEmail(email[0].value)) {
         email[0].style.borderColor = "red";
@@ -64,7 +57,6 @@ export function Signup(e) {
     } else {
         pass[0].style.borderColor = "white";
     }
-
 
     if (repass[0].value.length < 8) {
         repass[0].style.borderColor = "red";
@@ -84,7 +76,6 @@ export function Signup(e) {
     if (flag)
         return;
 
-    let self = this;
 
     fetch("http://localhost:8079/register", {
         method: "POST",
@@ -98,23 +89,24 @@ export function Signup(e) {
         credentials: "same-origin"
     }).then(function (response) {
 
+        //Signup successfully
         if (response.status === 200) {
             history.push('/login');
         } else {
+
+            //The user already exists
             response.json().then(function (res) {
                 document.getElementById("msg").innerHTML =
                     res.MSG;
             })
         }
-
     }, function (error) {
-        // error.message //=> String
-
+        console.log(error.message)
     })
 }
 
 
-export function Log(e) {
+export function Log() {
 
     let username = document.getElementsByClassName('username');
     let pass = document.getElementsByClassName('pass');
@@ -123,7 +115,7 @@ export function Log(e) {
     //Check Input validation
     if (username[0].value.length < 4) {
         username[0].style.borderColor = "red";
-        username[0].placeholder = 'Enter User Name';
+        username[0].placeholder = 'Username';
         flag = true;
     } else {
         username[0].style.borderColor = "white";
@@ -138,6 +130,7 @@ export function Log(e) {
     if (flag)
         return;
 
+
     fetch("http://localhost:8079/login", {
         method: "POST",
         body: JSON.stringify({username: username[0].value, password: pass[0].value}),
@@ -148,18 +141,20 @@ export function Log(e) {
         credentials: "include"
     }).then(function (response) {
         response.json().then(function (user) {
-            //Save user data in the browser session
-            sessionStorage.setItem("username", user.username);
-            sessionStorage.setItem("first", user.first);
-            sessionStorage.setItem("last", user.last);
-            sessionStorage.setItem("email", user.email);
-            sessionStorage.setItem("favorites", JSON.stringify(user.favorites));
 
+            //logged in successfully
             if (response.status === 200) {
+                //Save user data in the browser session
+                sessionStorage.setItem("username", user.username);
+                sessionStorage.setItem("first", user.first);
+                sessionStorage.setItem("last", user.last);
+                sessionStorage.setItem("email", user.email);
+                sessionStorage.setItem("favorites", JSON.stringify(user.favorites));
                 history.push('/home/stations');
             }
             else {
-                document.getElementById("msg").innerHTML = "The user doesn't exist";
+                //Non exist username
+                document.getElementById("msg").innerHTML = "The password or username are incorrect";
             }
         })
     }, function (error) {
@@ -168,9 +163,8 @@ export function Log(e) {
 }
 
 
-export function updateData(e) {
+export function updateData() {
 
-    // console.log(e);
     let username = document.getElementsByClassName('username');
     let firstname = document.getElementsByClassName('firstname');
     let lastname = document.getElementsByClassName('lastname');
@@ -192,7 +186,6 @@ export function updateData(e) {
         flag = true;
     } else
         lastname[0].style.borderColor = "white";
-
 
     if (!validateEmail(email[0].value)) {
         email[0].style.borderColor = "red";
@@ -230,7 +223,6 @@ export function updateData(e) {
     sessionStorage.setItem("last", lastname[0].value);
     sessionStorage.setItem("email", email[0].value);
 
-
     //update server
     fetch("http://localhost:8079/update", {
         method: "POST",
@@ -247,12 +239,12 @@ export function updateData(e) {
         credentials: "same-origin"
     }).then(function (response) {
         response.json().then(function (res) {
-            console.log(response.status);
+
             if (response.status === 200) {
                 document.getElementsByClassName("update-message")[0].innerHTML = "Information Updated :)";
             }
             else {
-                document.getElementsByClassName("update-message")[0].innerHTML = "Opps.. something went wrong, please try again later";
+                document.getElementsByClassName("update-message")[0].innerHTML = "Please try again later :(";
             }
         });
     }, function (error) {
@@ -260,8 +252,7 @@ export function updateData(e) {
     })
 }
 
-
-export function checkCookies() {
+export function fetchData() {
 
     fetch("http://localhost:8079/connection/", {
         method: "GET",
@@ -280,13 +271,11 @@ export function checkCookies() {
                 sessionStorage.setItem("last", user.last);
                 sessionStorage.setItem("email", user.email);
                 sessionStorage.setItem("favorites", JSON.stringify(user.favorites));
-                console.log("Im in the server!");
-                history.push('/home/stations');
             }
-
-            if(response.status === 500)
-            console.log("Not inside the server!");
-
+            else {
+                //User doesnt logged in the server
+                console.log("Not inside the server!");
+            }
         })
     }, function (error) {
         console.log(error.message);

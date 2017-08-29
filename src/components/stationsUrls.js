@@ -1,9 +1,5 @@
-/**
- * Created by barak on 21/08/2017.
- */
 
 //Object that contains the list of stations ip
-
 module.exports = [
     ["http://103fm.live.streamgates.net/103fm_live/1multix/icecast.audio", "103FM" , "http://103fm.maariv.co.il" ],
     ["http://194.153.101.160:8000/idc123.mp3", "IDC Radio" , "http://1062fm.co.il"],

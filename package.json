@@ -1,7 +1,7 @@
 {
-  "name": "react-es6-webpack-boilerplate",
-  "version": "5.0.0",
-  "description": "Boilerplate for kick starting a React Project with ES6 (Babel) and Hot reloader using Webpack.",
+  "name": "RadioStream",
+  "version": "1.0.0",
+  "description": "Final project in mobile web applications IDC 2017 ",
   "main": "/src/index.js",
   "scripts": {
     "start": "node app.js --hot",

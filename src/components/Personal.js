@@ -1,23 +1,16 @@
-/**
- * Created by barak on 20/08/2017.
- */
 import React, {Component} from 'react';
 import {updateData} from  '../clientApi/LoginRegisterApi'
 
 export  default class Personal extends Component {
 
-
     constructor(props) {
-
         super(props);
-
         this.state = {
             username: sessionStorage.getItem("username"),
             firstname: sessionStorage.getItem("first"),
             lastname: sessionStorage.getItem("last"),
             email: sessionStorage.getItem("email")
-        }
-
+        };
         this.updateInput.bind(this);
     }
 
@@ -78,7 +71,8 @@ export  default class Personal extends Component {
                     </button>
                     <br/>
                     <br/>
-                    <h3 className="update-message"> </h3>
+                    <h3 className="update-message"
+                    style={{textAlign : "center"}}> </h3>
                 </div>
             </div>
         )

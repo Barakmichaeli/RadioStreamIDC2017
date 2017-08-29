@@ -1,6 +1,3 @@
-/**
- * Created by barak on 14/08/2017.
- */
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom'
 import {Signup} from '../clientApi/LoginRegisterApi';
@@ -8,7 +5,7 @@ import {Signup} from '../clientApi/LoginRegisterApi';
 class Register extends Component {
     render() {
         return (
-            
+
             <div className="register-container container">
                 <div className="login-header">
                     <h1><u>RadioStream Register</u></h1>
@@ -33,9 +30,7 @@ class Register extends Component {
                     <h3>Retype password:</h3>
                     <input className="re-pass" type="password" placeholder="Eight valid characters "/>
                     <br/>
-
                     <h5 id="msg"> </h5>
-
                     <button onClick={ (e) => {
                         Signup(e);
                     }}> Sign me up!

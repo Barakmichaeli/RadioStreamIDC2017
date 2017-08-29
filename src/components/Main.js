@@ -1,13 +1,10 @@
-/**
- * Created by barak on 19/08/2017.
- */
 import React, {Component} from 'react';
 import MainBar from './MainBar';
 import Home from './Home';
 import Favorites from './Favorites';
 import Personal from './Personal';
 import Team from './Team';
-import {Router, Route , Redirect} from 'react-router'
+import {Router, Route, Redirect} from 'react-router'
 import {Switch} from 'react-router-dom'
 
 

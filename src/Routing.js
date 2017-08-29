@@ -6,7 +6,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Main from './components/Main';
 import './App.css'
-import {checkCookies} from './clientApi/LoginRegisterApi';
+import {fetchData} from './clientApi/LoginRegisterApi';
 
 export default class Routing extends Component {
 
@@ -20,7 +20,7 @@ export default class Routing extends Component {
                     <Route path="/home" render={() => ( (sessionStorage.length !== 0) ?
                             <Main/> :
                             <div>
-                                {checkCookies()}
+                                {fetchData()}
                                 <Redirect to="/login"/>
                             </div>
                     )}/>

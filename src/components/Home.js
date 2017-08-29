@@ -1,6 +1,3 @@
-/**
- * Created by barak on 19/08/2017.
- */
 import React, {Component} from 'react';
 import ListItem from './ListItem';
 import stations from './stationsUrls';
@@ -43,7 +40,6 @@ class Home extends Component {
     componentDidUpdate() {
         this.refs.audio.load();
     }
-
 
     render() {
         return (

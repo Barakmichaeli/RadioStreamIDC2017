@@ -200,13 +200,12 @@ module.exports = (PORT) => {
 
     app.get('/connection', function (req, res, next) {
 
-        //If connected return other uid and movev foward
-        if (logedInUsersTag[req.cookies.uid]) {
+        let username = logedInUsersTag[req.cookies.uid];
 
-            console.log("User is connected!");
+        //If connected return other uid and move foward
+        if (username) {
 
             //Set New cookie
-            let username = logedInUsersTag[req.cookies.uid];
             UIDcountrer++;
             logedInUsers[username] = UIDcountrer;
             delete logedInUsersTag[req.cookies.uid];
@@ -228,7 +227,7 @@ module.exports = (PORT) => {
                 }
             });
         } else {
-            res.status(500).send("cant access page");
+            res.status(404).send("cant access page");
         }
     });
 
