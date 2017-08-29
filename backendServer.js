@@ -14,7 +14,6 @@ module.exports = (PORT) => {
     let UIDcountrer = 0;
     let logedInUsersTag = {};
 
-    // console.log(__dirname);
 
     app.use(express.static(path.join(__dirname, 'build')));
     app.use(bodyParser.json());
