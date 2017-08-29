@@ -26,6 +26,7 @@ module.exports = (PORT) => {
 
 
     if (process.env.NODE_ENV === 'production') {
+        console.log("here");
         app.use(express.static('static/build'));
     }
 
