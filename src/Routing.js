@@ -6,19 +6,10 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Main from './components/Main';
 import './App.css'
-
+import {checkCookies} from './clientApi/LoginRegisterApi';
 
 export default class Routing extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
-    isLoggedIn() {
-        let self = this;
-        if(sessionStorage.length !== 0)
-        return true;
-    }
 
     render() {
         return (
@@ -26,10 +17,14 @@ export default class Routing extends Component {
                 <Switch>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/register" component={Register}/>
-                    <Route path="/home" render={() => (this.isLoggedIn() ?
-                        <Main/> :
-                        <Redirect path="*" to="/login"/> )}/>
-                    <Redirect path="*" to="/login"/>
+                    <Route path="/home" render={() => ( (sessionStorage.length !== 0) ?
+                            <Main/> :
+                            <div>
+                                {checkCookies()}
+                                <Redirect to="/login"/>
+                            </div>
+                    )}/>
+                    <Redirect path="*" to="/home"/>
                 </Switch>
             </Router >
         )

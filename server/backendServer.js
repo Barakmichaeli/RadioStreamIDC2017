@@ -14,6 +14,12 @@ module.exports = (PORT) => {
     let UIDcountrer = 0;
     let logedInUsersTag = {};
 
+
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(cookieParser());
+
+
     app.listen(PORT, function (err) {
         if (err)
             console.log(err);
@@ -21,24 +27,21 @@ module.exports = (PORT) => {
             console.log("Backend is up! on " + PORT);
     });
 
+
     // Allowing access to our main api server
     app.use(function (req, res, next) {
         // Website you wish to allow to connect
-        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
         // Request methods you wish to allow
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
         // Request headers you wish to allow
-        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, set=');
         // Set to true if you need the website to include cookies in the requests sent
         // to the API (e.g. in case you use sessions)
         res.setHeader('Access-Control-Allow-Credentials', true);
         // Pass to next layer of middleware
         next();
     });
-
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: true}));
-    app.use(cookieParser());
 
     let usersFile = './usersList.json';
 
@@ -187,6 +190,49 @@ module.exports = (PORT) => {
     });
 
 
+    app.post('/logout', function (req, res) {
+
+        delete logedInUsersTag[req.cookies.uid];
+        res.status(200).send();
+
+    });
+
+
+    app.get('/connection', function (req, res, next) {
+
+        //If connected return other uid and movev foward
+        if (logedInUsersTag[req.cookies.uid]) {
+
+            console.log("User is connected!");
+
+            //Set New cookie
+            let username = logedInUsersTag[req.cookies.uid];
+            UIDcountrer++;
+            logedInUsers[username] = UIDcountrer;
+            delete logedInUsersTag[req.cookies.uid];
+            logedInUsersTag[UIDcountrer] = username;
+
+            let options = {
+                maxAge: 1000 * 60 * 60, // would expire after 60 minutes
+            };
+            res.cookie('uid', UIDcountrer);
+
+            fs.readFile(usersFile, 'utf8', function (err, data) {
+                if (err)
+                    res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
+
+                let obj = JSON.parse(data);
+                for (x in obj) {
+                    if (obj[x].username === username)
+                        res.status(200).send(JSON.stringify(obj[x]));
+                }
+            });
+        } else {
+            res.status(500).send("cant access page");
+        }
+    });
+
+
     app.post('/addFavorite', function (req, res) {
 
         let username = req.body.username;
@@ -292,31 +338,4 @@ module.exports = (PORT) => {
             res.status(400).send(JSON.stringify({text: "Error with request from client"}));
         }
     });
-
-
-    app.get('/favorites/:username', function (req, res) {
-
-        let username = req.params.username;
-        //Validate if logged in?
-
-        fs.readFile(usersFile, 'utf8', function (err, data) {
-            if (err) {
-                res.status(500).send(JSON.stringify({text: "Error while reading the file", favorites: []}));
-            }
-
-            //Our data
-            let obj = JSON.parse(data);
-            let arr = [];
-
-            //Search for the file
-            for (x in obj) {
-                if (obj[x].userName === username) {
-                    arr = obj[x].favorites;
-                    break;
-                }
-            }
-            console.log("server returned " + arr);
-            res.status(200).send(JSON.stringify({text: "Removed", favorites: arr}));
-        });
-    });
-};
+}

@@ -6,10 +6,6 @@ import {Link} from 'react-router-dom'
 import {Signup} from '../clientApi/LoginRegisterApi';
 
 class Register extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             

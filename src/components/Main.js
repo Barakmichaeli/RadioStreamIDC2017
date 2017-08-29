@@ -7,7 +7,7 @@ import Home from './Home';
 import Favorites from './Favorites';
 import Personal from './Personal';
 import Team from './Team';
-import {Router, Route, Redirect, Link} from 'react-router'
+import {Router, Route , Redirect} from 'react-router'
 import {Switch} from 'react-router-dom'
 
 
@@ -22,6 +22,7 @@ class Main extends Component {
                     <Route exact path="/home/favorites" component={Favorites}/>
                     <Route exact path="/home/personal" component={Personal}/>
                     <Route exact path="/home/team" component={Team}/>
+                    <Redirect path="/home" to="/home/stations"/>
                 </Switch>
             </div>
         )

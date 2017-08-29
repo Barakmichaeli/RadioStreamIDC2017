@@ -4,11 +4,6 @@ import {Log} from '../clientApi/LoginRegisterApi';
 
 
 class Login extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
 
     render() {
         return (

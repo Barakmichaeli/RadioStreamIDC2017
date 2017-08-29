@@ -10,12 +10,14 @@ export  default class Personal extends Component {
     constructor(props) {
 
         super(props);
+
         this.state = {
             username: sessionStorage.getItem("username"),
             firstname: sessionStorage.getItem("first"),
             lastname: sessionStorage.getItem("last"),
             email: sessionStorage.getItem("email")
         }
+
         this.updateInput.bind(this);
     }
 
@@ -76,7 +78,7 @@ export  default class Personal extends Component {
                     </button>
                     <br/>
                     <br/>
-                    <h3 className="update-message"></h3>
+                    <h3 className="update-message"> </h3>
                 </div>
             </div>
         )

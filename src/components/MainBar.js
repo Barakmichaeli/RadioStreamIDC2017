@@ -94,18 +94,32 @@ class MainBar extends Component {
     }
 
 
+    logout() {
+        fetch("http://localhost:8079/logout", {
+            method: "POST",
+            headers: {
+                Accept: 'application/json',
+                "Content-Type": "application/json",
+            },
+            credentials: "include"
+        }).then(function (response) {
+            console.log("bye bye");
+        }, function (error) {
+            console.log(error.message);
+        })
+    }
+
     render() {
         return (
             <header className="upper-menu">
                 <div className="icon">
                 </div>
-                logout
-
                 <table>
                     <tbody>
                     <tr>
                         <Link to="/login" onClick={() => {
                             sessionStorage.clear();
+                            this.logout();
                         }}>
                             <td id="logout">
                                 Logout

@@ -115,8 +115,7 @@ button {
 
 .upper-menu {
     position: static;
-    height: 70px;
-    margin-top: -12px;
+    height: 45px;
     text-align: center;
     border-bottom: 1px solid white;
     background-color: #000000;
