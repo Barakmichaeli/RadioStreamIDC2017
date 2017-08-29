@@ -1,16 +1,15 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config.js');
-let backServer = require('./server/backendServer');
+let backServer = require('./backendServer');
 
 module.exports = (PORT) => {
-    let backendPort = PORT - 1;
-
+    let BACKPORT = PORT - 1;
     new WebpackDevServer(webpack(config), {
         publicPath: config.output.publicPath,
         hot: true,
         proxy: {
-            "/api": 'http://localhost:' + backendPort // <- over express backend
+            "/api": 'http://localhost:' + BACKPORT // <- over express backend
         },
         historyApiFallback: true
     }).listen(PORT, 'localhost', (err) => {
@@ -20,5 +19,5 @@ module.exports = (PORT) => {
         console.log('Listening at localhost:' + PORT);
     });
 
-    backServer(backendPort);
+    backServer(PORT);
 };

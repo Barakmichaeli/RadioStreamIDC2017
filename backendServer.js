@@ -14,11 +14,12 @@ module.exports = (PORT) => {
     let UIDcountrer = 0;
     let logedInUsersTag = {};
 
-    app.use('/', express.static(path.join(__dirname, 'build')));
+    // console.log(__dirname);
+
+    app.use(express.static(path.join(__dirname, 'build')));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());
-
 
 
     app.listen(PORT, function (err) {
@@ -31,7 +32,7 @@ module.exports = (PORT) => {
     // Allowing access to our main api server
     app.use(function (req, res, next) {
         // Website you wish to allow to connect
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:' + PORT);
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:' + (process.env.PORT || 8080));
         // Request methods you wish to allow
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
         // Request headers you wish to allow

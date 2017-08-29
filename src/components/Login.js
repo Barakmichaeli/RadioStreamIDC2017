@@ -17,7 +17,7 @@ class Login extends Component {
                     <input type="text" className="username" placeholder="Username"/>
                     <br/> <br/>
                     <h3>Password:</h3>
-                    <input className="pass form-control" type="password" placeholder="********"/>
+                    <input className="pass" type="password" placeholder="********"/>
                     <br/><br/>
                     <h5 id="msg"> </h5>
                     <br/>
