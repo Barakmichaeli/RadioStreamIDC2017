@@ -159,7 +159,7 @@ export function Log(e) {
                 history.push('/home/stations');
             }
             else {
-                document.getElementById("msg").innerHTML = "The user doesn't exist";
+                document.getElementById("msg").innerHTML = "The password or username is incorrect";
             }
         })
     }, function (error) {
@@ -284,7 +284,7 @@ export function checkCookies() {
                 history.push('/home/stations');
             }
 
-            if(response.status === 500)
+            else(response.status === 500)
             console.log("Not inside the server!");
 
         })
