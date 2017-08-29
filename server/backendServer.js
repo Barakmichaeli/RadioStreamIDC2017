@@ -210,7 +210,7 @@ module.exports = (PORT) => {
             //Set New cookie
             UIDcountrer++;
             logedInUsers[username] = UIDcountrer;
-            delete logedInUsersTag[req.cookies.uid];
+            delete logedInUsersTag[username];
             logedInUsersTag[UIDcountrer] = username;
 
             let options = {
