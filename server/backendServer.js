@@ -4,17 +4,20 @@
 
 module.exports = (PORT) => {
 
-
     let express = require("express");
     const app = express();
+    const path = require('path');
     let bodyParser = require('body-parser');
     let cookieParser = require('cookie-parser');
-
     let fs = require('fs');
     let logedInUsers = {};
     let UIDcountrer = 0;
     let logedInUsersTag = {};
 
+    app.use('/', express.static(path.join(__dirname, 'build')));
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(cookieParser());
 
 
     app.listen(PORT, function (err) {
@@ -23,18 +26,6 @@ module.exports = (PORT) => {
         else
             console.log("Backend is up! on " + PORT);
     });
-
-
-    if (process.env.NODE_ENV === 'production') {
-        console.log("here");
-        app.use(express.static('static/build'));
-    }
-
-
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: true}));
-    app.use(cookieParser());
-
 
     // Allowing access to our main api server
     app.use(function (req, res, next) {
@@ -52,10 +43,7 @@ module.exports = (PORT) => {
     });
 
     let usersFile = './usersList.json';
-
-
     function configureLists() {
-
         if (!fs.existsSync(usersFile)) {
             fs.writeFile(usersFile, "[]", function (err) {
                 if (err)
@@ -65,7 +53,6 @@ module.exports = (PORT) => {
     }
 
     configureLists();
-
 
     function authenticationRegister(user, callback) {
 
