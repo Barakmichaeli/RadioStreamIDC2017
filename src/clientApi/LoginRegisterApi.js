@@ -24,11 +24,14 @@ export function Signup(e) {
 
 
     if (username[0].value.length < 4) {
+        document.getElementById("msg").innerHTML = "User name must be at least 4 Characters";
         username[0].style.borderColor = "red";
-        username[0].placeholder = 'Enter User Name';
+        username[0].placeholder = 'Enter At Least 4 Characters User Name';
         flag = true;
+        return;
     } else {
         username[0].style.borderColor = "white";
+        document.getElementById("msg").innerHTML = "";
     }
 
     if (firstname[0].value.length === 0) {
@@ -53,22 +56,28 @@ export function Signup(e) {
         email[0].style.borderColor = "red";
         email[0].placeholder = 'Enter Valid Mail';
         flag = true;
+        document.getElementById("msg").innerHTML = "Email is not valid";
+        return;
     } else {
         email[0].style.borderColor = "white";
+        document.getElementById("msg").innerHTML = "";
     }
 
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
-        pass[0].placeholder = 'Enter Password';
+        pass[0].placeholder = 'Enter At Least 8 Characters Password';
         flag = true;
+        document.getElementById("msg").innerHTML = "Password must be at least 8 Characters";
+        return;
     } else {
         pass[0].style.borderColor = "white";
+        document.getElementById("msg").innerHTML = "";
     }
 
 
     if (repass[0].value.length < 8) {
         repass[0].style.borderColor = "red";
-        repass[0].placeholder = 'Enter Password';
+        repass[0].placeholder = 'Enter At Least 8 Characters Password';
         flag = true;
     } else {
         repass[0].style.borderColor = "white";
@@ -124,16 +133,22 @@ export function Log(e) {
     if (username[0].value.length < 4) {
         username[0].style.borderColor = "red";
         username[0].placeholder = 'Enter User Name';
+        document.getElementById("msg").innerHTML = "Enter a valid user name";
         flag = true;
+        return;
     } else {
         username[0].style.borderColor = "white";
+        document.getElementById("msg").innerHTML = "";
     }
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
         pass[0].placeholder = 'Enter Password';
         flag = true;
+        document.getElementById("msg").innerHTML = "Enter a valid password";
+        return;
     } else {
         pass[0].style.borderColor = "white";
+        document.getElementById("msg").innerHTML = "";
     }
     if (flag)
         return;
