@@ -4,7 +4,7 @@
   "description": "Final project in mobile web applications IDC 2017 ",
   "main": "/src/index.js",
   "scripts": {
-    "start": "node app.js --hot",
+    "start": "node app.js",
     "dev": "webpack-dev-server --progress --colors --hot --config ./webpack.config.js ",
     "build": "cross-env BABEL_ENV=production ./node_modules/.bin/webpack --display-error-details --config webpack.config.production.js"
   },
