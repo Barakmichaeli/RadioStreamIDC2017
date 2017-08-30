@@ -190,7 +190,7 @@ td:hover {
     width: 100%;
     height: 100vh;
     color: white;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -204,7 +204,7 @@ td:hover {
     width: 100%;
     font-family: 'Catamaran', monospace !important;
     overflow: auto;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -217,7 +217,7 @@ td:hover {
     height: 100%;
     width: 100%;
     overflow: auto;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -230,7 +230,7 @@ td:hover {
     background-size: cover;
     height: 100%;
     width: 100%;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
