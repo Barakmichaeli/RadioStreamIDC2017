@@ -56,9 +56,9 @@ h5 {
 }
 
 .login-header h1 {
-    font-family: 'Quicksand', monospace;
+    font-family: 'Amatica SC', monospace;
     text-shadow: 0px 5px 15px #000;
-    font-size: 55px;
+    font-size: 65px;
 }
 
 .register-container {
@@ -85,7 +85,7 @@ h5 {
     opacity: 0.8;
     color: black;
     background-color: #F9F8F8;
-    width: 35%;
+    width: 40%;
     padding-top: 1%;
     padding-bottom: 1%;
     text-align: center;
@@ -163,7 +163,7 @@ td {
     padding: 5px;
     border-right: 0.5px solid #ffffff;
     cursor: pointer;
-    font-size: 27px;
+    font-size: 28px;
     color: white;
 }
 
@@ -289,7 +289,7 @@ audio {
     }
 
     td {
-        font-size: 2.5vw;
+        font-size: 100%;
     }
 
     .login-button {
@@ -297,7 +297,8 @@ audio {
     }
 
     .upper-menu {
-        height: 7.8vw;
+        height: 9.9vw;
+        position: fixed;
     }
 
     .update-form {
