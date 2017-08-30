@@ -86,7 +86,7 @@ export function Signup(e) {
 
     let self = this;
 
-    fetch("http://localhost:8079/register", {
+    fetch("api/register", {
         method: "POST",
         body: JSON.stringify({
             username: username[0].value, password: pass[0].value, firstName: firstname[0].value,
@@ -138,7 +138,7 @@ export function Log(e) {
     if (flag)
         return;
 
-    fetch("http://localhost:8079/login", {
+    fetch("api/login", {
         method: "POST",
         body: JSON.stringify({username: username[0].value, password: pass[0].value}),
         headers: {
@@ -159,7 +159,7 @@ export function Log(e) {
                 history.push('/home/stations');
             }
             else {
-                document.getElementById("msg").innerHTML = "The user doesn't exist";
+                document.getElementById("msg").innerHTML = "Invalid username or password";
             }
         })
     }, function (error) {
@@ -232,7 +232,7 @@ export function updateData(e) {
 
 
     //update server
-    fetch("http://localhost:8079/update", {
+    fetch("api/update", {
         method: "POST",
         body: JSON.stringify({
             username: username[0].value,
@@ -263,7 +263,7 @@ export function updateData(e) {
 
 export function checkCookies() {
 
-    fetch("http://localhost:8079/connection/", {
+    fetch("api/connection/", {
         method: "GET",
         headers: {
             Accept: 'application/json',

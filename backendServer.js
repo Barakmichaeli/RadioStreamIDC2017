@@ -115,7 +115,7 @@ module.exports = (PORT) => {
                 let msg = {};
                 switch (reason) {
                     case "user":
-                        msg = JSON.stringify({MSG: "user name exists"});
+                        msg = JSON.stringify({MSG: "User name already exists"});
                         res.status(500).send(msg);
                         break;
                     case "email":
