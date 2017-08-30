@@ -263,7 +263,7 @@ h3 {
     background-color: white;
     font-family: 'Architects Daughter', cursive;
     border-radius: 5px;
-    width: 430px;
+    width: 135%;
     height: 38px;
     padding-left: 11px;
     margin-top: 3px;
@@ -273,7 +273,7 @@ h3 {
     font-family: 'Amatica SC', monospace !important;
     color: white;
     float: right;
-    margin-right: 10%;
+    margin-right: 5%;
     font-size: 22px;
     margin-top: 16%;
 }
@@ -283,7 +283,7 @@ audio {
 }
 
 /*Media Querie*/
-@media only screen and (min-width: 150px) and (max-width: 925px) {
+@media only screen and (min-width: 150px) and (max-width: 800px) {
 
     body {
         height: auto;
