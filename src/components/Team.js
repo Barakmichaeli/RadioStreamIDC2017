@@ -21,12 +21,11 @@ export  default class Team extends Component {
                 </div>
 
 
-                <div  style={{float : "left" ,  marginRight : "2%"  , marginLeft : "27%" , marginBottom : "4%" , marginTop : "5%"}} className="home-title noam">
+                <div  style={{float : "left" ,  marginRight : "2%"  , marginLeft : "27%" , marginBottom : "4%" , marginTop : "12%"}} className="home-title noam">
                     <h1>Noam Meirovich</h1>
                     <h2>noamm91@gmail.com</h2>
                     <h2>Fullstack Senior in RadioStream</h2>
                 </div>
-
             </div>
         )
     }
