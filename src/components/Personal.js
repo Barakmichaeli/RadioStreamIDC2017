@@ -67,7 +67,7 @@ export  default class Personal extends Component {
                     <br/> <br/>
                     <button onClick={ (e) => {
                         updateData(e);
-                    }}> Update information
+                    }}> Update
                     </button>
                     <br/>
                     <br/>
