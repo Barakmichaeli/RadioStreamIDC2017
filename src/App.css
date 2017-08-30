@@ -34,6 +34,7 @@ html, body {
 body {
     background-size: cover;
     font-family: 'Catamaran', monospace !important;
+    min-width: 550px;
 }
 
 h1, h2, h3, h4, h6, a {
@@ -62,7 +63,7 @@ h5 {
 }
 
 .register-container {
-    background: url("images/kimberly-richards-335.jpg") fixed center no-repeat;
+    background: url("images/austin-neill-247047.jpg") fixed center no-repeat;
     background-size: cover;
     height: 100vh;
     overflow: auto;
@@ -71,7 +72,7 @@ h5 {
 }
 
 .login-container {
-    background: url("images/kimberly-richards-335.jpg") fixed center no-repeat;
+    background: url("images/austin-neill-247047.jpg") fixed center no-repeat;
     background-size: cover;
     height: 100vh;
     overflow: auto;
@@ -80,27 +81,27 @@ h5 {
 }
 
 .login-form {
-    margin: 25px auto;
+    margin: -20px auto;
     border: .5px solid #fff;
-    opacity: 0.8;
+    opacity: 0.96;
     color: black;
     background-color: #F9F8F8;
     width: 40%;
     padding-top: 1%;
-    padding-bottom: 1%;
+    padding-bottom: 3%;
     text-align: center;
 }
 
 .login-form h3, .update-form h3 {
-    font-size: 12px;
+    font-size: 17px;
     text-align: left;
     margin-left: 20px;
-    margin-bottom: 5px;
     color: #000000;
     font-weight: bolder;
 }
 
-input {
+input{
+    height: 5%;
     width: 90%;
 }
 
@@ -118,7 +119,7 @@ button {
 .login-form input[type="button"] {
     font-family: 'Catamaran', monospace !important;
     font-size: 18px;
-    height: 30px;
+    height: 36px;
     width: 70%;
     color: black;
     cursor: pointer;
@@ -137,7 +138,7 @@ button {
 
 .upper-menu {
     position: relative;
-    height: 54px;
+    height: 60px;
     z-index: 10;
     text-align: center;
     border-bottom: 1px solid white;
@@ -163,7 +164,7 @@ td {
     padding: 5px;
     border-right: 0.5px solid #ffffff;
     cursor: pointer;
-    font-size: 28px;
+    font-size: 180%;
     color: white;
 }
 
@@ -208,6 +209,7 @@ td:hover {
     background-size: cover;
     height: 100%;
     width: 100%;
+    overflow: auto;
     position: absolute;
     top: 0;
     left: 0;
@@ -231,7 +233,7 @@ td:hover {
 .update-form {
     margin-left: 12%;
     padding: 12px;
-    margin-top: 10%;
+    margin-top: 8%;
     width: 32%;
     opacity: 0.9;
     float: left;
@@ -255,7 +257,7 @@ h3 {
     font-family: 'Architects Daughter', cursive;
     border-radius: 5px;
     width: 380px;
-    height: 6%;
+    height: 38px;
     padding-left: 11px;
     margin-top: 3px;
 }
@@ -265,6 +267,7 @@ h3 {
     color: white;
     float: right;
     margin-right: 10%;
+    font-size : 22px;
     margin-top: 16%;
 }
 
@@ -289,7 +292,7 @@ audio {
     }
 
     td {
-        font-size: 140%;
+        font-size: 115%;
     }
 
     .login-button {
@@ -297,7 +300,7 @@ audio {
     }
 
     .upper-menu {
-        height: 45px;
+        height: 52px;
     }
 
     .update-form {
