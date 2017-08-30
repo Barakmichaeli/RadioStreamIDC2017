@@ -7,12 +7,11 @@ export  default class Team extends Component {
         return (
             <div className="team">
 
-                <div  style={{float : "left" , marginLeft : "15%" , marginTop : "18%"}} className="home-title">
+                <div  style={{float : "left" , marginLeft : "15%" , marginTop : "15.5%"}} className="home-title">
                     <h1>Barak Michaeli</h1>
                     <h2>Barak6546@gmail.com</h2>
                     <h2>CEO RadioStream</h2>
                 </div>
-
 
                 <div  style={{float : "right" , marginTop : "19%" , marginRight : "3%"}} className="home-title alon">
                     <h1>Alon Weiner</h1>
