@@ -289,17 +289,17 @@ audio {
     }
 
     td {
-        font-size: 100%;
+        font-size: 140%;
     }
 
     .login-button {
         margin-bottom: 30px;
     }
 
-    .upper-menu {
-        height: 9.9vw;
-        position: fixed;
-    }
+    /*.upper-menu {*/
+        /*height: 9.9vw;*/
+        /*!*position: fixed;*!*/
+    /*}*/
 
     .update-form {
         width: 60%;
