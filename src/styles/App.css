@@ -94,10 +94,16 @@ h5 {
 
 .login-form h3, .update-form h3 {
     font-size: 17px;
+    margin-bottom: 5px;
     text-align: left;
     margin-left: 20px;
     color: #000000;
     font-weight: bolder;
+}
+
+
+label{
+    display: initial;
 }
 
 input{
@@ -110,7 +116,7 @@ button {
     margin-top: 8px;
     font-family: 'Catamaran', monospace !important;
     font-size: 18px;
-    height: auto;
+    height: 36px;
     width: 70%;
     color: black;
     cursor: pointer;

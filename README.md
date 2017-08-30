@@ -1,6 +1,8 @@
-# React ES6 Webpack Boilerplate
+# Radiostream application
 
-Boilerplate for kick starting a project with the following technologies:
+Final project in web application course IDC 2017
+
+
 * [React](https://github.com/facebook/react)
 * [Babel 6](http://babeljs.io)
 * [Webpack](http://webpack.github.io) for bundling

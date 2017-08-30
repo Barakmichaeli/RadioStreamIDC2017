@@ -8,12 +8,9 @@
     "dev": "webpack-dev-server --progress --colors --hot --config ./webpack.config.js ",
     "build": "cross-env BABEL_ENV=production ./node_modules/.bin/webpack --display-error-details --config webpack.config.production.js"
   },
-  "author": "Vasanth Krishnamoorthy (http://www.vasanthk.com)",
+  "author": "Barak michaeli , Noam meeirovich , Alon weiner",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vasanthk/react-es6-webpack-boilerplate/issues"
-  },
-  "homepage": "https://github.com/vasanthk/react-es6-webpack-boilerplate",
+  "homepage": "https://radiostream.herokuapp.com/",
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.21.0",
