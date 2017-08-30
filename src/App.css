@@ -296,10 +296,9 @@ audio {
         margin-bottom: 30px;
     }
 
-    /*.upper-menu {*/
-        /*height: 9.9vw;*/
-        /*!*position: fixed;*!*/
-    /*}*/
+    .upper-menu {
+        height: 45px;
+    }
 
     .update-form {
         width: 60%;
