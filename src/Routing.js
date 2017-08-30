@@ -12,19 +12,19 @@ export default class Routing extends Component {
 
 
     render() {
+        console.log("here");
         return (
             <Router history={history}>
                 <Switch>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/register" component={Register}/>
-                    <Route path="/home" render={() => ( (sessionStorage.length !== 0) ?
+                    <Route path="*" render={() => ( (sessionStorage.length !== 0) ?
                             <Main/> :
                             <div>
                                 {fetchData()}
                                 <Redirect to="/login"/>
                             </div>
                     )}/>
-                    <Redirect path="*" to="/home"/>
                 </Switch>
             </Router >
         )

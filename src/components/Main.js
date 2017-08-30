@@ -15,11 +15,11 @@ class Main extends Component {
             <div className="container-home">
                 <MainBar/>
                 <Switch>
-                    <Route exact path="/home/stations" component={Home}/>
-                    <Route exact path="/home/favorites" component={Favorites}/>
-                    <Route exact path="/home/personal" component={Personal}/>
-                    <Route exact path="/home/team" component={Team}/>
-                    <Redirect path="/home" to="/home/stations"/>
+                    <Route exact path="/stations" component={Home}/>
+                    <Route exact path="/favorites" component={Favorites}/>
+                    <Route exact path="/personal" component={Personal}/>
+                    <Route exact path="/team" component={Team}/>
+                    <Redirect path="*" to="/stations"/>
                 </Switch>
             </div>
         )

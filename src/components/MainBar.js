@@ -15,7 +15,7 @@ class MainBar extends Component {
     }
 
     logout() {
-        fetch("http://localhost:8079/logout", {
+        fetch("api/logout", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -45,7 +45,7 @@ class MainBar extends Component {
                             </td>
                         </Link>
 
-                        <Link to="/home/personal" onClick={() => {
+                        <Link to="/personal" onClick={() => {
                             this.setColor("personal");
                         }}>
                             <td id="personal">
@@ -54,7 +54,7 @@ class MainBar extends Component {
                         </Link>
 
 
-                        <Link to="/home/favorites" onClick={(e) => {
+                        <Link to="/favorites" onClick={(e) => {
                             this.setColor("favorites");
                         }}>
                             <td id="favorites">
@@ -63,7 +63,7 @@ class MainBar extends Component {
                         </Link>
 
 
-                        <Link to="/home/stations" onClick={() => {
+                        <Link to="/stations" onClick={() => {
                             this.setColor("home");
                         }}>
                             <td id="home">
@@ -71,7 +71,7 @@ class MainBar extends Component {
                             </td>
                         </Link>
 
-                        <Link to="/home/team" onClick={() => {
+                        <Link to="/team" onClick={() => {
                             this.setColor("team");
                         }}>
                             <td id="team" style={{borderRightColor: "#000000"}}>

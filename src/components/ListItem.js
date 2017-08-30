@@ -25,7 +25,7 @@ class ListItem extends Component {
         sessionStorage.setItem("favorites", JSON.stringify(favorites));
 
         //update  in server
-        fetch("http://localhost:8079/addFavorite", {
+        fetch("/api/addFavorite", {
             method: "POST",
             body: JSON.stringify({station: station, username: username}),
             headers: {
@@ -58,7 +58,7 @@ class ListItem extends Component {
 
         //update favorites in server
         let self = this;
-        fetch("http://localhost:8079/removeFavorite", {
+        fetch("/api/removeFavorite", {
             method: "POST",
             body: JSON.stringify({station: station, username: username}),
             headers: {
@@ -67,7 +67,6 @@ class ListItem extends Component {
             credentials: "same-origin"
         }).then((response) => {
                 response.json().then(function (res) {
-
                     //In home don't remove stars just display empty star
                     if (mode === "Home")
                         self.setState({

@@ -77,7 +77,7 @@ export function Signup(e) {
         return;
 
 
-    fetch("http://localhost:8079/register", {
+    fetch("api/register", {
         method: "POST",
         body: JSON.stringify({
             username: username[0].value, password: pass[0].value, firstName: firstname[0].value,
@@ -131,7 +131,7 @@ export function Log() {
         return;
 
 
-    fetch("http://localhost:8079/login", {
+    fetch("api/login", {
         method: "POST",
         body: JSON.stringify({username: username[0].value, password: pass[0].value}),
         headers: {
@@ -224,7 +224,7 @@ export function updateData() {
     sessionStorage.setItem("email", email[0].value);
 
     //update server
-    fetch("http://localhost:8079/update", {
+    fetch("api/update", {
         method: "POST",
         body: JSON.stringify({
             username: username[0].value,
@@ -254,7 +254,7 @@ export function updateData() {
 
 export function fetchData() {
 
-    fetch("http://localhost:8079/connection/", {
+    fetch("api/connection", {
         method: "GET",
         headers: {
             Accept: 'application/json',

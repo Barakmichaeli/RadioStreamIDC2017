@@ -14,8 +14,13 @@ module.exports = (PORT) => {
     let UIDcountrer = 0;
     let logedInUsersTag = {};
 
+    app.get('/bundle.js', function (req, res) {
+        res.sendFile(__dirname + '/build/bundle.js');
+    });
+    app.get('*', function (req, res) {
+        res.sendFile(__dirname + '/build/index.html');
+    });
 
-    app.use(express.static(path.join(__dirname, 'build')));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());
@@ -25,7 +30,7 @@ module.exports = (PORT) => {
         if (err)
             console.log(err);
         else
-            console.log("Backend is up! on " + PORT);
+            console.log("Backend Server is up! on : " + PORT);
     });
 
     // Allowing access to our main api server
@@ -44,6 +49,7 @@ module.exports = (PORT) => {
     });
 
     let usersFile = './usersList.json';
+
     function configureLists() {
         if (!fs.existsSync(usersFile)) {
             fs.writeFile(usersFile, "[]", function (err) {
@@ -90,7 +96,7 @@ module.exports = (PORT) => {
     }
 
 
-    app.post('/register', function (req, res) {
+    app.post('/api/register', function (req, res) {
 
         let user = {
             username: req.body.username,
@@ -147,7 +153,7 @@ module.exports = (PORT) => {
 
 
     // Handling login request
-    app.post('/login', function (req, res) {
+    app.post('/api/login', function (req, res) {
 
         let username = req.body.username;
         let pass = req.body.password;
@@ -186,7 +192,7 @@ module.exports = (PORT) => {
     });
 
 
-    app.post('/logout', function (req, res) {
+    app.post('/api/logout', function (req, res) {
 
         delete logedInUsersTag[req.cookies.uid];
         res.status(200).send();
@@ -194,7 +200,7 @@ module.exports = (PORT) => {
     });
 
 
-    app.get('/connection', function (req, res, next) {
+    app.get('/api/connection', function (req, res, next) {
 
         let username = logedInUsersTag[req.cookies.uid];
 
@@ -228,7 +234,9 @@ module.exports = (PORT) => {
     });
 
 
-    app.post('/addFavorite', function (req, res) {
+    app.post('/api/addFavorite', function (req, res) {
+
+        console.log("here!!!!");
 
         let username = req.body.username;
         let station = req.body.station;
@@ -258,7 +266,7 @@ module.exports = (PORT) => {
     });
 
 
-    app.post('/removeFavorite', function (req, res) {
+    app.post('/api/removeFavorite', function (req, res) {
 
         let username = req.body.username;
         let station = req.body.station;
@@ -294,7 +302,7 @@ module.exports = (PORT) => {
     });
 
 
-    app.post('/update', function (req, res) {
+    app.post('/api/update', function (req, res) {
 
         //Constant user name
         let username = req.body.username;
