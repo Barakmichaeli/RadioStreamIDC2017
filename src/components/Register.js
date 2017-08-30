@@ -25,11 +25,11 @@ class Register extends Component {
                     <input className="email" type="email" placeholder="Email"/>
                     <br/> <br/>
                     {/*<h3>Password:</h3>*/}
-                    <input className="pass" type="password" placeholder="Password : Eight valid characters "/>
+                    <input className="pass" type="password" placeholder="Password : eight valid characters "/>
                     <br/> <br/>
                     {/*<h3>Retype password:</h3>*/}
                     <input className="re-pass" type="password"
-                           placeholder="Password : Eight valid characters  "/>
+                           placeholder="RePassword : eight valid characters  "/>
                     <br/>
                     <br/>
                     <label className="genderBox"> <input id="male"  style={{width: "20px", height: "15px", marginBottom: "0px"}}

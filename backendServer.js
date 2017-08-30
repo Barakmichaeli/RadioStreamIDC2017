@@ -21,6 +21,7 @@ module.exports = (PORT) => {
         res.sendFile(__dirname + '/build/index.html');
     });
 
+
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());

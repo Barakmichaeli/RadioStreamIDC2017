@@ -59,7 +59,7 @@ export function Signup(e) {
 
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
-        pass[0].placeholder = 'Enter Password';
+        pass[0].placeholder = 'Enter Valid Password';
         flag = true;
     } else {
         pass[0].style.borderColor = "white";
@@ -68,7 +68,7 @@ export function Signup(e) {
 
     if (repass[0].value.length < 8) {
         repass[0].style.borderColor = "red";
-        repass[0].placeholder = 'Enter Password';
+        repass[0].placeholder = 'Password again';
         flag = true;
     } else {
         repass[0].style.borderColor = "white";
