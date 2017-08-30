@@ -3,7 +3,6 @@
 @font-face{
     font-family: 'Amatica SC';
     src: url('https://fonts.googleapis.com/css?family=Amatica+SC');
-
 }
 
 
@@ -17,7 +16,7 @@ html, body {
 
 body {
     background-size: cover;
-    font-family: 'HP Simplified Light', monospace;
+    font-family: 'Amatica SC', monospace !important;
 }
 
 h1, h2, h3, h4, h6, a {
@@ -121,7 +120,7 @@ button {
 
 .upper-menu {
     position: relative;
-    height: 50px;
+    height: 46px;
     z-index: 10;
     text-align: center;
     border-bottom: 1px solid white;
@@ -296,6 +295,6 @@ audio {
     }
 
     .station-item {
-        width: 60vw;
+        width: 80vw;
     }
 }
