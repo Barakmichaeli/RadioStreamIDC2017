@@ -81,7 +81,7 @@ h5 {
 }
 
 .login-form {
-    margin: -20px auto;
+    margin: 3px auto;
     border: .5px solid #fff;
     opacity: 0.96;
     color: black;
@@ -164,7 +164,7 @@ td {
     padding: 5px;
     border-right: 0.5px solid #ffffff;
     cursor: pointer;
-    font-size: 180%;
+    font-size: 220%;
     color: white;
 }
 
@@ -292,7 +292,7 @@ audio {
     }
 
     td {
-        font-size: 115%;
+        font-size: 150%;
     }
 
     .login-button {
