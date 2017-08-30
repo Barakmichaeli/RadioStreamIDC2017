@@ -14,7 +14,7 @@ class Login extends Component {
                 </div>
                 <div className="login-form">
                     <h3>Username:</h3>
-                    <input type="text" className="username" placeholder="Username"/>
+                    <input type="text" className="username" placeholder="RadioStream"/>
                     <br/> <br/>
                     <h3>Password:</h3>
                     <input className="pass" type="password" placeholder="********"/>

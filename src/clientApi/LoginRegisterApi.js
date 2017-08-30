@@ -10,12 +10,18 @@ function validateEmail(email) {
 
 export function Signup(e) {
 
+
     let username = document.getElementsByClassName('username');
     let firstname = document.getElementsByClassName('firstname');
     let lastname = document.getElementsByClassName('lastname');
     let email = document.getElementsByClassName('email');
     let pass = document.getElementsByClassName('pass');
     let repass = document.getElementsByClassName('re-pass');
+    let male = document.getElementById("male");
+    let female = document.getElementById("female");
+    console.log(female.checked);
+
+
     let flag = false;
 
     if (username[0].value.length < 4) {
@@ -66,12 +72,26 @@ export function Signup(e) {
         repass[0].style.borderColor = "white";
     }
 
+
     if (repass[0].value !== pass[0].value) {
         document.getElementById("msg").innerHTML = "Passwords do not match";
         flag = true;
     } else {
         document.getElementById("msg").innerHTML = "";
     }
+
+    //Need to implement
+    if (!male.checked && !female.checked) {
+        male.style.borderColor = "red";
+        female.style.borderColor = "red";
+        flag = true;
+    } else {
+        male.style.borderColor = "white";
+        female.style.borderColor = "white";    }
+
+
+    let gender =  (male.checked)? "male" : "female";
+
 
     if (flag)
         return;
@@ -81,7 +101,7 @@ export function Signup(e) {
         method: "POST",
         body: JSON.stringify({
             username: username[0].value, password: pass[0].value, firstName: firstname[0].value,
-            lastName: lastname[0].value, email: email[0].value
+            lastName: lastname[0].value, email: email[0].value , gender : gender
         }),
         headers: {
             "Content-Type": "application/json"

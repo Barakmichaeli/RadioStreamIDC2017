@@ -49,7 +49,6 @@ module.exports = (PORT) => {
     });
 
     let usersFile = './usersList.json';
-
     function configureLists() {
         if (!fs.existsSync(usersFile)) {
             fs.writeFile(usersFile, "[]", function (err) {
@@ -60,7 +59,6 @@ module.exports = (PORT) => {
     }
 
     configureLists();
-
     function authenticationRegister(user, callback) {
 
         fs.readFile(usersFile, 'utf8', function (err, data) {
@@ -104,6 +102,7 @@ module.exports = (PORT) => {
             first: req.body.firstName,
             last: req.body.lastName,
             email: req.body.email,
+            gender : req.body.gender,
             favorites: []
         };
         authenticationRegister(user, function (val, reason) {
@@ -235,8 +234,6 @@ module.exports = (PORT) => {
 
 
     app.post('/api/addFavorite', function (req, res) {
-
-        console.log("here!!!!");
 
         let username = req.body.username;
         let station = req.body.station;

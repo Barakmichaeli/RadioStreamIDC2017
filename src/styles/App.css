@@ -103,6 +103,7 @@ h5 {
 input{
     height: 5%;
     width: 90%;
+    margin-bottom: -4%;
 }
 
 button {
