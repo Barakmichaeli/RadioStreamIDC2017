@@ -33,10 +33,10 @@ class Register extends Component {
                     <h5 id="msg"> </h5>
                     <button onClick={ (e) => {
                         Signup(e);
-                    }}> Sign me up!
+                    }}> Signup
                     </button>
                     <br/>
-                    <Link to={"/login"}> <input type="button" value="Go to Login" className="register-button"/></Link>
+                    <Link to={"/login"}> <input type="button" value="Login" className="register-button"/></Link>
                 </div>
             </div>
         )

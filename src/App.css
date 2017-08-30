@@ -148,7 +148,7 @@ table {
     margin-left: auto;
     margin-right: auto;
     vertical-align: bottom;
-    font-family: 'Quicksand', monospace;
+    font-family: 'Amatica SC', monospace;
 }
 
 a {
@@ -163,7 +163,7 @@ td {
     padding: 5px;
     border-right: 0.5px solid #ffffff;
     cursor: pointer;
-    font-size: 21px;
+    font-size: 27px;
     color: white;
 }
 
