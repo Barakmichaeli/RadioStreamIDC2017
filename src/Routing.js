@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 import Main from './components/Main';
-import './App.css'
+import './styles/App.css'
 import {fetchData} from './clientApi/LoginRegisterApi';
 
 export default class Routing extends Component {
