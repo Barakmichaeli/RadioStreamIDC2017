@@ -13,6 +13,7 @@
     font-family: 'Catamaran';
     src: url('https://fonts.googleapis.com/css?family=Catamaran');
 }
+
 @font-face {
     font-family: 'Architects Daughter';
     src: url('https://fonts.googleapis.com/css?family=Architects+Daughter');
@@ -101,12 +102,11 @@ h5 {
     font-weight: bolder;
 }
 
-
-label{
+label {
     display: initial;
 }
 
-input{
+input {
     height: 5%;
     width: 90%;
     margin-bottom: -4%;
@@ -274,7 +274,7 @@ h3 {
     color: white;
     float: right;
     margin-right: 10%;
-    font-size : 22px;
+    font-size: 22px;
     margin-top: 16%;
 }
 
@@ -283,10 +283,24 @@ audio {
 }
 
 /*Media Querie*/
-@media only screen and (min-width: 150px) and (max-width: 890px) {
+@media only screen and (min-width: 150px) and (max-width: 925px) {
 
     body {
         height: auto;
+    }
+
+    audio{
+        width: 90%;
+    }
+
+
+
+    .home-title {
+        width: 45%;
+    }
+
+    p {
+        font-size: 21px !important;
     }
 
     .login-form h3 {
@@ -325,6 +339,11 @@ audio {
     }
 
     .station-item {
-        width: 100vw;
+        width: 77vw;
+    }
+
+    .stations-list {
+        margin-left: -30px;
+
     }
 }
