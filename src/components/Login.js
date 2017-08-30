@@ -26,7 +26,7 @@ class Login extends Component {
                     }}> Login
                     </button>
                     <br/>
-                    <Link to={"/register"}><input type="button" value="Go to Signup!"/></Link>
+                    <Link to={"/register"}><input type="button" value="Signup"/></Link>
                     <br/> <br/>
 
                 </div>

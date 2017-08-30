@@ -1,10 +1,27 @@
 @import url(https://fonts.googleapis.com/css?family=Amatica+SC);
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+@import url(https://fonts.googleapis.com/css?family=Catamaran);
+@import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
 
-@font-face{
+@font-face {
     font-family: 'Amatica SC';
     src: url('https://fonts.googleapis.com/css?family=Amatica+SC');
 }
 
+@font-face {
+    font-family: 'Catamaran';
+    src: url('https://fonts.googleapis.com/css?family=Catamaran');
+}
+@font-face {
+    font-family: 'Architects Daughter';
+    src: url('https://fonts.googleapis.com/css?family=Architects+Daughter');
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('https://fonts.googleapis.com/css?family=Raleway');
+}
 
 html, body {
     margin: 0;
@@ -16,7 +33,7 @@ html, body {
 
 body {
     background-size: cover;
-    font-family: 'Amatica SC', monospace !important;
+    font-family: 'Catamaran', monospace !important;
 }
 
 h1, h2, h3, h4, h6, a {
@@ -39,7 +56,7 @@ h5 {
 }
 
 .login-header h1 {
-    font-family: 'Amatica SC', monospace;
+    font-family: 'Quicksand', monospace;
     text-shadow: 0px 5px 15px #000;
     font-size: 55px;
 }
@@ -63,7 +80,7 @@ h5 {
 }
 
 .login-form {
-    margin: 0 auto;
+    margin: 25px auto;
     border: .5px solid #fff;
     opacity: 0.8;
     color: black;
@@ -89,7 +106,7 @@ input {
 
 button {
     margin-top: 10px;
-    font-family: 'HP Simplified Light', monospace;
+    font-family: 'Catamaran', monospace !important;
     font-size: 18px;
     height: auto;
     width: 70%;
@@ -99,7 +116,7 @@ button {
 }
 
 .login-form input[type="button"] {
-    font-family: 'HP Simplified Light', monospace;
+    font-family: 'Catamaran', monospace !important;
     font-size: 18px;
     height: 30px;
     width: 70%;
@@ -120,7 +137,7 @@ button {
 
 .upper-menu {
     position: relative;
-    height: 46px;
+    height: 54px;
     z-index: 10;
     text-align: center;
     border-bottom: 1px solid white;
@@ -131,7 +148,7 @@ table {
     margin-left: auto;
     margin-right: auto;
     vertical-align: bottom;
-    /*position: absolute;*/
+    font-family: 'Quicksand', monospace;
 }
 
 a {
@@ -177,6 +194,7 @@ td:hover {
     background-size: cover;
     height: 100%;
     width: 100%;
+    font-family: 'Catamaran', monospace !important;
     overflow: auto;
     position: absolute;
     top: 0;
@@ -234,14 +252,16 @@ h3 {
 
 .station-item {
     background-color: white;
+    font-family: 'Architects Daughter', cursive;
     border-radius: 5px;
-    width: 300px;
+    width: 380px;
     height: 6%;
     padding-left: 11px;
     margin-top: 3px;
 }
 
 .home-title {
+    font-family: 'Amatica SC', monospace !important;
     color: white;
     float: right;
     margin-right: 10%;
