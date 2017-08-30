@@ -12,11 +12,12 @@ html, body {
     padding: 0;
     height: 100%;
     width: 100%;
+    min-width: 450px;
 }
 
 body {
     background-size: cover;
-    font-family: 'HP Simplified Light', cursive;
+    font-family: 'HP Simplified Light', monospace;
 }
 
 h1, h2, h3, h4, h6, a {
@@ -39,7 +40,7 @@ h5 {
 }
 
 .login-header h1 {
-    font-family: 'Amatica SC', cursive;
+    font-family: 'Amatica SC', monospace;
     text-shadow: 0px 5px 15px #000;
     font-size: 55px;
 }
@@ -89,7 +90,7 @@ input {
 
 button {
     margin-top: 10px;
-    font-family: 'HP Simplified Light', cursive;
+    font-family: 'HP Simplified Light', monospace;
     font-size: 18px;
     height: auto;
     width: 70%;
@@ -99,7 +100,7 @@ button {
 }
 
 .login-form input[type="button"] {
-    font-family: 'HP Simplified Light', cursive;
+    font-family: 'HP Simplified Light', monospace;
     font-size: 18px;
     height: 30px;
     width: 70%;
@@ -256,7 +257,7 @@ audio {
 @media only screen and (min-width: 150px) and (max-width: 800px) {
 
     body {
-        height: 500px;
+        height: auto;
     }
 
     .login-form h3 {
