@@ -52,7 +52,7 @@ class Favorites extends Component {
     render() {
         return (
             <div id="favorites" className="main-block favorites">
-                <div className="home-title">
+                <div className="home-title fav">
                     <h1>Favorites</h1>
                     <h2>What is your favorite station?</h2>
                     <h2>Let the music control. </h2>

@@ -25,13 +25,14 @@ export  default class Personal extends Component {
         return (
             <div className="personal">
 
-                <div className="home-title">
+                <div className="home-title privacy">
                     <h1>Privacy</h1>
                     <h2>We are Obligated for safety.</h2>
                 </div>
 
 
-                <div id="updateForm" className="update-form">
+                <div id="updateForm" className="update-form
+                ">
                     <h3>Username:</h3>
                     <input className="username" type="text" placeholder="Username"
                            value={this.state.username}

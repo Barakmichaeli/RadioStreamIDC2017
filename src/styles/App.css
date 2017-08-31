@@ -69,7 +69,7 @@ h5 {
     height: 100vh;
     overflow: auto;
     width: 100%;
-    position: absolute;
+    position: fixed;
 }
 
 .login-container {
@@ -78,7 +78,7 @@ h5 {
     height: 100vh;
     overflow: auto;
     width: 100%;
-    position: absolute;
+    position: fixed;
 }
 
 .login-form {
@@ -87,7 +87,7 @@ h5 {
     opacity: 0.96;
     color: black;
     background-color: #F9F8F8;
-    width: 40%;
+    width: 40vw;
     padding-top: 1%;
     padding-bottom: 3%;
     text-align: center;
@@ -144,8 +144,10 @@ button {
 }
 
 .upper-menu {
-    position: relative;
+    position: sticky;
     height: 60px;
+    width: 100%;
+    min-width: 550px;
     z-index: 10;
     text-align: center;
     border-bottom: 1px solid white;
@@ -184,16 +186,14 @@ td:hover {
 }
 
 .team {
-    overflow: auto;
     background: url("../images/martin-wessely-210.jpg") fixed center no-repeat;
     background-size: cover;
     width: 100%;
     height: 100vh;
     color: white;
     position: fixed;
+    overflow: auto;
     top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
 }
 
@@ -242,6 +242,7 @@ td:hover {
     padding: 12px;
     margin-top: 8%;
     width: 32%;
+    font-size: 12px;
     opacity: 0.9;
     float: left;
     background-color: white;
@@ -263,7 +264,7 @@ h3 {
     background-color: white;
     font-family: 'Architects Daughter', cursive;
     border-radius: 5px;
-    width: 135%;
+    width: 380px;
     height: 38px;
     padding-left: 11px;
     margin-top: 3px;
@@ -274,7 +275,7 @@ h3 {
     color: white;
     float: right;
     margin-right: 5%;
-    font-size: 22px;
+    font-size: 23px;
     margin-top: 16%;
 }
 
@@ -289,11 +290,9 @@ audio {
         height: auto;
     }
 
-    audio{
+    audio {
         width: 90%;
     }
-
-
 
     .home-title {
         width: 45%;
@@ -334,7 +333,6 @@ audio {
     }
 
     .home-title {
-        float: none;
         margin-left: 10%;
     }
 
@@ -342,8 +340,38 @@ audio {
         width: 77vw;
     }
 
+    .login-form {
+        width: 70vw;
+    }
+
+    .alon {
+        margin-top: 4% !important;
+    }
+
     .stations-list {
         margin-left: -30px;
 
+    }
+
+    .fav {
+        float: none;
+    }
+
+    .privacy {
+        float: none;
+    }
+
+    .main {
+        float: none;
+    }
+}
+
+@media only screen and (min-width: 150px) and (max-width: 500px) {
+
+    .home-title {
+        font-size: 20px;
+    }
+    .alon {
+        margin-right: 45% !important;
     }
 }

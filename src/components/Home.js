@@ -45,7 +45,7 @@ class Home extends Component {
         return (
             <div id="home" className="main-block home">
 
-                <div className="home-title">
+                <div className="home-title main">
                     <h1>RadioStream</h1>
                     <h2>Changing the world of radio.</h2>
                     <h2>Play. Control. Repeat.</h2>
