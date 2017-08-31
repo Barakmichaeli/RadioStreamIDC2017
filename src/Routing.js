@@ -6,24 +6,18 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Main from './components/Main';
 import './styles/App.css'
-import {checkCookies} from './clientApi/LoginRegisterApi';
-
 export default class Routing extends Component {
 
-
     render() {
-        console.log("here");
         return (
             <Router history={history}>
                 <Switch>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/register" component={Register}/>
-                    <Route path="*" render={() => ( (sessionStorage.length !== 0) ?
-                            <Main/> :
-                            <div>
-                                {checkCookies()}
-                                <Redirect to="/login"/>
-                            </div>
+                    <Route path="*" render={() => ( (document.cookie.includes("uid=")) ?
+                                <Main/>
+                            :
+                            <Redirect to="/login"/>
                     )}/>
                 </Switch>
             </Router >

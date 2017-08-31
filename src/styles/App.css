@@ -81,6 +81,13 @@ h5 {
     position: fixed;
 }
 
+.loading{
+    background: url("../images/neonbrand-350410.jpg") fixed center no-repeat;
+    background-size: cover;
+    height: 100vh;
+
+}
+
 .login-form {
     margin: 3px auto;
     border: .5px solid #fff;
@@ -88,14 +95,15 @@ h5 {
     color: black;
     background-color: #F9F8F8;
     width: 40vw;
-    padding-top: 1%;
+    padding-top: 3%;
     padding-bottom: 3%;
     text-align: center;
 }
 
 .login-form h3, .update-form h3 {
-    font-size: 17px;
+    font-size: 14px;
     margin-bottom: 5px;
+    margin-top: 5px;
     text-align: left;
     margin-left: 20px;
     color: #000000;
@@ -223,6 +231,11 @@ td:hover {
     bottom: 0;
 }
 
+
+.log{
+    margin-top: -30px;
+}
+
 .personal {
     overflow: auto;
     background: url("../images/greyson-joralemon-332028.jpg") fixed center no-repeat;
@@ -348,6 +361,11 @@ audio {
 
     }
 
+    .login-form{
+        padding-bottom: 7%;
+    }
+
+
     .fav {
         float: none;
     }
@@ -373,6 +391,11 @@ audio {
 
     td{
         font-size: 4vw;
+    }
+
+
+    .login-header h1{
+        font-size: 40px;
     }
 
     table{

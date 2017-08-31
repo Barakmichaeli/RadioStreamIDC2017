@@ -37,7 +37,9 @@ class MainBar extends Component {
                     <tbody>
                     <tr>
                         <Link to="/login" onClick={() => {
+                            //Clear cookies and session
                             sessionStorage.clear();
+                            document.cookie = 'uid=; Max-Age=0';
                             this.logout();
                         }}>
                             <td id="logout">

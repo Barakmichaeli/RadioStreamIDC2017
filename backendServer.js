@@ -1,6 +1,3 @@
-/**
- * Created by barak on 18/08/2017.
- */
 
 module.exports = (PORT) => {
 
@@ -10,6 +7,7 @@ module.exports = (PORT) => {
     let bodyParser = require('body-parser');
     let cookieParser = require('cookie-parser');
     let fs = require('fs');
+
     let logedInUsers = {};
     let UIDcountrer = 0;
     let logedInUsersTag = {};
@@ -17,10 +15,10 @@ module.exports = (PORT) => {
     app.get('/bundle.js', function (req, res) {
         res.sendFile(__dirname + '/build/bundle.js');
     });
+
     app.get('*', function (req, res) {
         res.sendFile(__dirname + '/build/index.html');
     });
-
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
@@ -34,22 +32,18 @@ module.exports = (PORT) => {
             console.log("Backend Server is up! on : " + PORT);
     });
 
-    // Allowing access to our main api server
     app.use(function (req, res, next) {
-        // Website you wish to allow to connect
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:' + (process.env.PORT || 8080));
-        // Request methods you wish to allow
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-        // Request headers you wish to allow
         res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, set=');
         // Set to true if you need the website to include cookies in the requests sent
         // to the API (e.g. in case you use sessions)
         res.setHeader('Access-Control-Allow-Credentials', true);
-        // Pass to next layer of middleware
         next();
     });
 
     let usersFile = './usersList.json';
+
     function configureLists() {
         if (!fs.existsSync(usersFile)) {
             fs.writeFile(usersFile, "[]", function (err) {
@@ -60,6 +54,7 @@ module.exports = (PORT) => {
     }
 
     configureLists();
+
     function authenticationRegister(user, callback) {
 
         fs.readFile(usersFile, 'utf8', function (err, data) {
@@ -70,7 +65,7 @@ module.exports = (PORT) => {
             let obj = [];
             if (data.length !== 0) {
                 obj = JSON.parse(data);
-                //IF user exists return with reason
+                //If user exists return with reason
                 for (i in obj) {
                     if (obj[i].username === user.username) {
                         callback(false, "user");
@@ -82,8 +77,7 @@ module.exports = (PORT) => {
                     }
                 }
             }
-            //If user doesnt exist we
-            // add him and return true
+            //If user doesn't exist we add him and return true
             obj.push(user);
             let jsonObj = JSON.stringify(obj, null, 2);
             fs.writeFile(usersFile, jsonObj, function (err) {
@@ -103,13 +97,12 @@ module.exports = (PORT) => {
             first: req.body.firstName,
             last: req.body.lastName,
             email: req.body.email,
-            gender : req.body.gender,
+            gender: req.body.gender,
             favorites: []
         };
         authenticationRegister(user, function (val, reason) {
-
-            //Confirmed
             if (val) {
+                //case user registered successfully return status 200.
                 res.status(200).send({MSG: "ADDED"});
             }
             else {
@@ -137,7 +130,6 @@ module.exports = (PORT) => {
             if (err) {
                 res.status(500).send("Opps, Something went wrong..");
             }
-
             if (data.length !== 0) {
                 let x = JSON.parse(data);
                 for (i in x) {
@@ -151,8 +143,6 @@ module.exports = (PORT) => {
         });
     }
 
-
-    // Handling login request
     app.post('/api/login', function (req, res) {
 
         let username = req.body.username;
@@ -161,6 +151,7 @@ module.exports = (PORT) => {
         authenticationLogin(username, pass, function (val, user) {
 
             if (val) {
+                //Case user logged in - return his data from the server
                 let userInformation = {
                     username: user.username,
                     first: user.first,
@@ -168,20 +159,20 @@ module.exports = (PORT) => {
                     email: user.email,
                     favorites: user.favorites
                 };
+
                 let uid = logedInUsers[username];
-                //Already logged in
-                if (uid) { // Return his UID
+                if (uid) {
+                    //Already loggedin - return his uid
                     res.cookie('uid', uid);
                 } else {
-                    //If not logged in return this
+                    //If not loggedin return this
                     UIDcountrer++;
                     logedInUsers[username] = UIDcountrer;
                     logedInUsersTag[UIDcountrer] = username;
                     let options = {
                         maxAge: 1000 * 60 * 60, // would expire after 60 minutes
-                        httpOnly: true, // The cookie only accessible by the web server
-                        // signed: true // Indicates if the cookie should be signed
                     };
+
                     res.cookie('uid', UIDcountrer, options);
                 }
                 res.status(200).send(JSON.stringify(userInformation));
@@ -193,20 +184,16 @@ module.exports = (PORT) => {
 
 
     app.post('/api/logout', function (req, res) {
-
+        //User logged out - so we remove his key
         delete logedInUsersTag[req.cookies.uid];
         res.status(200).send();
-
     });
 
 
-    app.get('/api/connection', function (req, res, next) {
+    app.post('/api/connection', function (req, res, next) {
 
         let username = logedInUsersTag[req.cookies.uid];
-
-        //If connected return other uid and move foward
         if (username) {
-
             //Set New cookie
             UIDcountrer++;
             logedInUsers[username] = UIDcountrer;
@@ -217,19 +204,26 @@ module.exports = (PORT) => {
                 maxAge: 1000 * 60 * 60, // would expire after 60 minutes
             };
             res.cookie('uid', UIDcountrer);
-
             fs.readFile(usersFile, 'utf8', function (err, data) {
                 if (err)
-                    res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
+                    res.status(500).send(JSON.stringify("Error while reading the file"));
 
                 let obj = JSON.parse(data);
                 for (x in obj) {
-                    if (obj[x].username === username)
-                        res.status(200).send(JSON.stringify(obj[x]));
+                    if (obj[x].username === username) {
+                        let userInformation = {
+                            username: obj[x].username,
+                            first: obj[x].first,
+                            last: obj[x].last,
+                            email: obj[x].email,
+                            favorites: obj[x].favorites
+                        };
+                        res.status(200).send(JSON.stringify(userInformation));
+                    }
                 }
             });
         } else {
-            res.status(404).send("cant access page");
+            res.status(404).send(JSON.stringify("error"));
         }
     });
 
@@ -290,7 +284,6 @@ module.exports = (PORT) => {
                             console.log(err.message);
                             res.status(500).send(JSON.stringify({text: "Error override the file"}));
                         }
-                        ;
                     });
                     break;
                 }
@@ -339,4 +332,4 @@ module.exports = (PORT) => {
             res.status(400).send(JSON.stringify({text: "Error with request from client"}));
         }
     });
-}
+};

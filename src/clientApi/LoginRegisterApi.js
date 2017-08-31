@@ -148,14 +148,14 @@ export function Log(e) {
         credentials: "include"
     }).then(function (response) {
         response.json().then(function (user) {
-            //Save user data in the browser session
-            sessionStorage.setItem("username", user.username);
-            sessionStorage.setItem("first", user.first);
-            sessionStorage.setItem("last", user.last);
-            sessionStorage.setItem("email", user.email);
-            sessionStorage.setItem("favorites", JSON.stringify(user.favorites));
 
             if (response.status === 200) {
+                //Save user data in the browser session
+                sessionStorage.setItem("username", user.username);
+                sessionStorage.setItem("first", user.first);
+                sessionStorage.setItem("last", user.last);
+                sessionStorage.setItem("email", user.email);
+                sessionStorage.setItem("favorites", JSON.stringify(user.favorites));
                 history.push('/home/stations');
             }
             else {
@@ -258,39 +258,6 @@ export function updateData(e) {
     }, function (error) {
         console.log(error);
     })
-}
-
-
-export function checkCookies() {
-
-    fetch("api/connection/", {
-        method: "GET",
-        headers: {
-            Accept: 'application/json',
-            "Content-Type": "application/json",
-        },
-        credentials: "include"
-    }).then(function (response) {
-        response.json().then(function (user) {
-
-            //The user is logged in inside the server
-            if (response.status === 200) {
-                sessionStorage.setItem("username", user.username);
-                sessionStorage.setItem("first", user.first);
-                sessionStorage.setItem("last", user.last);
-                sessionStorage.setItem("email", user.email);
-                sessionStorage.setItem("favorites", JSON.stringify(user.favorites));
-                console.log("Im in the server!");
-                history.push('/home/stations');
-            }
-
-            if(response.status === 500)
-            console.log("Not inside the server!");
-
-        })
-    }, function (error) {
-        console.log(error.message);
-    });
 }
 
 
