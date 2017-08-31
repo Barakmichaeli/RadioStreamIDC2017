@@ -4,25 +4,25 @@
 @import url(https://fonts.googleapis.com/css?family=Catamaran);
 @import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
 
-@font-face {
-    font-family: 'Amatica SC';
-    src: url('https://fonts.googleapis.com/css?family=Amatica+SC');
-}
+/*@font-face {*/
+    /*font-family: 'Amatica SC';*/
+    /*src: url('https://fonts.googleapis.com/css?family=Amatica+SC');*/
+/*}*/
 
-@font-face {
-    font-family: 'Catamaran';
-    src: url('https://fonts.googleapis.com/css?family=Catamaran');
-}
+/*@font-face {*/
+    /*font-family: 'Catamaran';*/
+    /*src: url('https://fonts.googleapis.com/css?family=Catamaran');*/
+/*}*/
 
-@font-face {
-    font-family: 'Architects Daughter';
-    src: url('https://fonts.googleapis.com/css?family=Architects+Daughter');
-}
+/*@font-face {*/
+    /*font-family: 'Architects Daughter';*/
+    /*src: url('https://fonts.googleapis.com/css?family=Architects+Daughter');*/
+/*}*/
 
-@font-face {
-    font-family: 'Raleway';
-    src: url('https://fonts.googleapis.com/css?family=Raleway');
-}
+/*@font-face {*/
+    /*font-family: 'Raleway';*/
+    /*src: url('https://fonts.googleapis.com/css?family=Raleway');*/
+/*}*/
 
 html, body {
     margin: 0;
@@ -144,7 +144,7 @@ button {
 }
 
 .upper-menu {
-    position: absolute;
+    position: fixed;
     height: 60px;
     width: 100%;
     min-width: 550px;
@@ -320,6 +320,7 @@ audio {
     }
 
     .upper-menu {
+        top:0;
         height: 52px;
     }
 
@@ -373,5 +374,6 @@ audio {
     }
     .alon {
         margin-right: 45% !important;
+        margin-top: 32% !important;
     }
 }
