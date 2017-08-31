@@ -145,7 +145,7 @@ button {
 
 .upper-menu {
     position: fixed;
-    height: 60px;
+    height: auto;
     width: 100%;
     z-index: 10;
     text-align: center;
@@ -316,11 +316,6 @@ audio {
 
     .login-button {
         margin-bottom: 30px;
-    }
-
-    .upper-menu {
-        top:0;
-        height: auto;
     }
 
     .update-form {
