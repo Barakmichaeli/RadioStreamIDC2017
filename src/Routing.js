@@ -14,7 +14,7 @@ export default class Routing extends Component {
                 <Switch>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/register" component={Register}/>
-                    <Route path="*" render={() => ( (document.cookie.includes("uid=")) ?
+                    <Route path="*" render={() => ((document.cookie.includes("uid="))?
                                 <Main/>
                             :
                             <Redirect to="/login"/>

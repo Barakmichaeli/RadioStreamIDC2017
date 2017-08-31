@@ -40,9 +40,6 @@ class Main extends Component {
                         data: true
                     });
                 }
-                else {
-                    history.push('/login');
-                }
             })
         }, function (error) {
             console.log(error.message)
