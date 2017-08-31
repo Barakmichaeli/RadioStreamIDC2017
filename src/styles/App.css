@@ -147,7 +147,6 @@ button {
     position: fixed;
     height: 60px;
     width: 100%;
-    min-width: 550px;
     z-index: 10;
     text-align: center;
     border-bottom: 1px solid white;
@@ -367,13 +366,21 @@ audio {
     }
 }
 
-@media only screen and (min-width: 150px) and (max-width: 500px) {
+@media only screen and (min-width: 150px) and (max-width: 550px) {
 
     .home-title {
-        font-size: 20px;
+        font-size: 11px;
     }
     .alon {
         margin-right: 45% !important;
         margin-top: 32% !important;
+    }
+
+    td{
+        font-size: 4vw;
+    }
+
+    table{
+        margin-left: 0px !important; ;
     }
 }
