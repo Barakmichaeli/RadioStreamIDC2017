@@ -1,13 +1,19 @@
-Team members -
+Team members:
 
-1. Barak michaeli 204386882
-2. Noam meeirovich -
-3. Alon weiner -
+1. Barak Michaeli 204386882
+2. Noam Meeirovich - 304989528
+3. Alon Weiner - 301914891
 
 
 Link to heroku -
-https://radiostream.herokuapp.com/
+https://radiostream.herokuapp.com
 
 
 Extra notes -
-
+1. Generate radio stations list and play the selected station.
+2. Live streaming of radio stations which are part of a predefined list.
+3. save favorite radio stations and also the ability to remove them.
+4. Remember personal information as part of the current session (using sessionStorage)
+and provide the ability to change them.
+5. Remember logged in users using uid (as we learned in class) and therefore users can re enter the website
+directly to the main pages + fetch his information at the same time.

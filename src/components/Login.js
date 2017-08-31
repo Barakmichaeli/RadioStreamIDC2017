@@ -13,10 +13,8 @@ class Login extends Component {
                     <br/>
                 </div>
                 <div className="login-form">
-                    {/*<h3>Username:</h3>*/}
                     <input type="text" className="username" placeholder="What's your username?"/>
                     <br/> <br/>
-                    {/*<h3>Password:</h3>*/}
                     <input className="pass" type="password" placeholder="What's your password?"/>
                     <br/><br/>
                     <h5 id="msg"> </h5>

@@ -6,7 +6,6 @@ class Favorites extends Component {
 
     constructor(props) {
         super(props);
-        //Get favorites from session
         this.state = {
             currentStation: ["", ""],
         }
@@ -16,9 +15,9 @@ class Favorites extends Component {
     generateList() {
 
         let arr = [];
-        //Get the favorites from server!
-        let favorites = JSON.parse(sessionStorage.getItem("favorites"));
 
+        //the favorites from the server
+        let favorites = JSON.parse(sessionStorage.getItem("favorites"));
         favorites = stations.filter((station) => {
             return favorites.includes(station[1]);
         });
@@ -27,16 +26,9 @@ class Favorites extends Component {
             arr.push(<ListItem playStation={this.playStation.bind(this)}
                                favorite={true}
                                currentStation={this.state.currentStation}
-                               updateFavorites={this.updateFavorites(this)}
                                mode={"Favorites"}
                                station={favorites[i]}/>);
         return arr;
-    }
-
-    updateFavorites() {
-
-        //update Server!
-        //+ Re render
     }
 
     playStation(station) {

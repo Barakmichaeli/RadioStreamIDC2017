@@ -4,9 +4,9 @@ import Home from './Home';
 import Favorites from './Favorites';
 import Personal from './Personal';
 import Team from './Team';
-import LoadData from './LoadData';
 import {Router, Route, Redirect} from 'react-router'
 import {Switch} from 'react-router-dom'
+import history from '../components/history';
 
 
 class Main extends Component {
@@ -40,6 +40,9 @@ class Main extends Component {
                         data: true
                     });
                 }
+                else {
+                    history.push('/login');
+                }
             })
         }, function (error) {
             console.log(error.message)
@@ -63,7 +66,7 @@ class Main extends Component {
                     :
                     <div>
                         {this.fetchData()}
-                        <LoadData/>
+                        <div className="loading"> </div>
                     </div>
                 }
             </div>

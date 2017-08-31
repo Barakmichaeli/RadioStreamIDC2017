@@ -45,6 +45,7 @@ module.exports = (PORT) => {
     let usersFile = './usersList.json';
 
     function configureLists() {
+        //Our database is a text/Json format file on the server,
         if (!fs.existsSync(usersFile)) {
             fs.writeFile(usersFile, "[]", function (err) {
                 if (err)
@@ -52,7 +53,6 @@ module.exports = (PORT) => {
             });
         }
     }
-
     configureLists();
 
     function authenticationRegister(user, callback) {
@@ -63,6 +63,8 @@ module.exports = (PORT) => {
             }
 
             let obj = [];
+
+            //Case the database is empty - first register
             if (data.length !== 0) {
                 obj = JSON.parse(data);
                 //If user exists return with reason
@@ -77,7 +79,8 @@ module.exports = (PORT) => {
                     }
                 }
             }
-            //If user doesn't exist we add him and return true
+
+            //If user doesn't exist + the file doesnt empty we add new member and return true
             obj.push(user);
             let jsonObj = JSON.stringify(obj, null, 2);
             fs.writeFile(usersFile, jsonObj, function (err) {
@@ -106,6 +109,7 @@ module.exports = (PORT) => {
                 res.status(200).send({MSG: "ADDED"});
             }
             else {
+                //case we had problem return the reason
                 let msg = {};
                 switch (reason) {
                     case "user":
@@ -149,7 +153,6 @@ module.exports = (PORT) => {
         let pass = req.body.password;
 
         authenticationLogin(username, pass, function (val, user) {
-
             if (val) {
                 //Case user logged in - return his data from the server
                 let userInformation = {
@@ -162,15 +165,16 @@ module.exports = (PORT) => {
 
                 let uid = logedInUsers[username];
                 if (uid) {
-                    //Already loggedin - return his uid
+                    //already logged in - return his uid
                     res.cookie('uid', uid);
                 } else {
-                    //If not loggedin return this
+                    //if not logged in return this
                     UIDcountrer++;
                     logedInUsers[username] = UIDcountrer;
                     logedInUsersTag[UIDcountrer] = username;
                     let options = {
-                        maxAge: 1000 * 60 * 60, // would expire after 60 minutes
+                        maxAge: 1000 * 60 * 60,
+                        // would expire after 60 minutes
                     };
 
                     res.cookie('uid', UIDcountrer, options);
@@ -182,9 +186,8 @@ module.exports = (PORT) => {
         });
     });
 
-
     app.post('/api/logout', function (req, res) {
-        //User logged out - so we remove his key
+        //User logged out - so we remove his uid
         delete logedInUsersTag[req.cookies.uid];
         res.status(200).send();
     });
@@ -194,6 +197,7 @@ module.exports = (PORT) => {
 
         let username = logedInUsersTag[req.cookies.uid];
         if (username) {
+
             //Set New cookie
             UIDcountrer++;
             logedInUsers[username] = UIDcountrer;
@@ -201,7 +205,8 @@ module.exports = (PORT) => {
             logedInUsersTag[UIDcountrer] = username;
 
             let options = {
-                maxAge: 1000 * 60 * 60, // would expire after 60 minutes
+                maxAge: 1000 * 60 * 60,
+                // would expire after 60 minutes
             };
             res.cookie('uid', UIDcountrer);
             fs.readFile(usersFile, 'utf8', function (err, data) {
@@ -328,7 +333,7 @@ module.exports = (PORT) => {
             });
         }
         else {
-            // User Doesnt logged in
+            // User not logged in
             res.status(400).send(JSON.stringify({text: "Error with request from client"}));
         }
     });

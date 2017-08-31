@@ -13,7 +13,6 @@ function validateEmail(email) {
 
 export function Signup(e) {
 
-    // console.log(e);
     let username = document.getElementsByClassName('username');
     let firstname = document.getElementsByClassName('firstname');
     let lastname = document.getElementsByClassName('lastname');
@@ -23,6 +22,7 @@ export function Signup(e) {
     let flag = false;
 
 
+    //Check input validation
     if (username[0].value.length < 4) {
         username[0].style.borderColor = "red";
         username[0].placeholder = 'Enter User Name';
@@ -80,11 +80,9 @@ export function Signup(e) {
     } else {
         document.getElementById("msg").innerHTML = "";
     }
-
     if (flag)
         return;
 
-    let self = this;
 
     fetch("api/register", {
         method: "POST",
@@ -108,8 +106,7 @@ export function Signup(e) {
         }
 
     }, function (error) {
-        // error.message //=> String
-
+        console.log(error.message);
     })
 }
 
@@ -170,7 +167,6 @@ export function Log(e) {
 
 export function updateData(e) {
 
-    // console.log(e);
     let username = document.getElementsByClassName('username');
     let firstname = document.getElementsByClassName('firstname');
     let lastname = document.getElementsByClassName('lastname');
@@ -224,14 +220,14 @@ export function updateData(e) {
     if (flag)
         return;
 
-    //update session
+    //update current sessionStorage
     sessionStorage.setItem("username", username[0].value);
     sessionStorage.setItem("first", firstname[0].value);
     sessionStorage.setItem("last", lastname[0].value);
     sessionStorage.setItem("email", email[0].value);
 
 
-    //update server
+    //update the server
     fetch("api/update", {
         method: "POST",
         body: JSON.stringify({
