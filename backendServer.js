@@ -184,6 +184,7 @@ module.exports = (PORT) => {
 
     //Check if the client is connected
     app.use(function (req, res, next) {
+        console.log(req.cookies.uid);
         if (logedInUsersTag[req.cookies.uid])
             next();
         else
@@ -204,10 +205,11 @@ module.exports = (PORT) => {
 
         let username = req.body.username;
         let uid = logedInUsers[username];
+        console.log(username);
 
         //Delete member from online members objects
         delete logedInUsersTag[uid];
-        delete logedInUsersTag[username];
+        delete logedInUsers[username];
 
         fs.readFile(usersFile, 'utf8', function (err, data) {
             if (err)

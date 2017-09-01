@@ -265,6 +265,7 @@ export function removeUser() {
             Accept: 'application/json',
             "Content-Type": "application/json"
         },
+        credentials: "include"
     }).then(function (response) {
         //Clear cookies and the current browser tab session
         console.log(response.status);
