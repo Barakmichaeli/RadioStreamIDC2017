@@ -176,7 +176,7 @@ module.exports = (PORT) => {
                 }
                 res.status(200).send(JSON.stringify(userInformation));
             } else {
-                res.status(500).send(JSON.stringify("Not found"));
+                res.status(404).send(JSON.stringify("Couldn't find the user"));
             }
         });
     });
