@@ -16,10 +16,6 @@ class MainBar extends Component {
     }
 
     logout() {
-        //Clear cookies and the current browser tab session
-        sessionStorage.clear();
-        document.cookie = 'uid=; Max-Age=0';
-
         //Update the server
         fetch("api/logout", {
             method: "POST",
@@ -29,6 +25,9 @@ class MainBar extends Component {
             },
             credentials: "include"
         }).then(function (response) {
+            //Clear cookies and the current browser tab session
+            sessionStorage.clear();
+            document.cookie = 'uid=; Max-Age=0';
         }, function (error) {
             console.log(error.message);
         })
