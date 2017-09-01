@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {updateData} from  '../clientApi/LoginRegisterApi'
+import {removeUser} from  '../clientApi/LoginRegisterApi'
 
 export  default class Personal extends Component {
 
@@ -66,14 +67,18 @@ export  default class Personal extends Component {
                     <h3>Retype password:</h3>
                     <input className="repass" type="password" placeholder="Password again"/>
                     <br/> <br/>
+                    <h3 className="update-message"
+                        style={{textAlign : "center"}}> </h3>
+
                     <button onClick={ (e) => {
                         updateData(e);
                     }}> Update
                     </button>
-                    <br/>
-                    <br/>
-                    <h3 className="update-message"
-                    style={{textAlign : "center"}}> </h3>
+
+                    <button  onClick={ (e) => {
+                        removeUser(e);
+                    }}> Remove user
+                    </button>
                 </div>
             </div>
         )

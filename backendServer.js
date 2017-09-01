@@ -1,4 +1,3 @@
-
 module.exports = (PORT) => {
 
     let express = require("express");
@@ -7,19 +6,10 @@ module.exports = (PORT) => {
     let bodyParser = require('body-parser');
     let cookieParser = require('cookie-parser');
     let fs = require('fs');
-
     let logedInUsers = {};
     let UIDcountrer = 0;
     let logedInUsersTag = {};
-
-    app.get('/bundle.js', function (req, res) {
-        res.sendFile(__dirname + '/build/bundle.js');
-    });
-
-    app.get('*', function (req, res) {
-        res.sendFile(__dirname + '/build/index.html');
-    });
-
+    let usersFile = './usersList.json';
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(cookieParser());
@@ -36,13 +26,24 @@ module.exports = (PORT) => {
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:' + (process.env.PORT || 8080));
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
         res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, set=');
-        // Set to true if you need the website to include cookies in the requests sent
-        // to the API (e.g. in case you use sessions)
         res.setHeader('Access-Control-Allow-Credentials', true);
         next();
     });
 
-    let usersFile = './usersList.json';
+
+    app.get('/bundle.js', function (req, res) {
+        res.sendFile(__dirname + '/build/bundle.js');
+    });
+
+    app.get('*', function (req, res, next) {
+
+        if (req.path === "/api/connection")
+            next();
+        else
+            res.sendFile(__dirname + '/build/index.html');
+
+    });
+
 
     function configureLists() {
         //Our database is a text/Json format file on the server,
@@ -53,17 +54,16 @@ module.exports = (PORT) => {
             });
         }
     }
+
+
     configureLists();
-
     function authenticationRegister(user, callback) {
-
         fs.readFile(usersFile, 'utf8', function (err, data) {
             if (err) {
                 callback(false, "error");
             }
 
             let obj = [];
-
             //Case the database is empty - first register
             if (data.length !== 0) {
                 obj = JSON.parse(data);
@@ -80,7 +80,7 @@ module.exports = (PORT) => {
                 }
             }
 
-            //If user doesn't exist + the file doesnt empty we add new member and return true
+            //If user doesn't exist + the file doesn't empty we add new member and return true
             obj.push(user);
             let jsonObj = JSON.stringify(obj, null, 2);
             fs.writeFile(usersFile, jsonObj, function (err) {
@@ -113,15 +113,15 @@ module.exports = (PORT) => {
                 let msg = {};
                 switch (reason) {
                     case "user":
-                        msg = JSON.stringify({MSG: "User name already exists"});
+                        msg = JSON.stringify({MSG: "Username already exists"});
                         res.status(500).send(msg);
                         break;
                     case "email":
-                        msg = JSON.stringify({MSG: "email exists"});
+                        msg = JSON.stringify({MSG: "Email already exists"});
                         res.status(500).send(msg);
                         break;
                     default:
-                        msg = JSON.stringify({MSG: "There was a problem"});
+                        msg = JSON.stringify({MSG: "Please try again later :("});
                         res.status(500).send(msg);
                 }
             }
@@ -172,12 +172,7 @@ module.exports = (PORT) => {
                     UIDcountrer++;
                     logedInUsers[username] = UIDcountrer;
                     logedInUsersTag[UIDcountrer] = username;
-                    let options = {
-                        maxAge: 1000 * 60 * 60,
-                        // would expire after 60 minutes
-                    };
-
-                    res.cookie('uid', UIDcountrer, options);
+                    res.cookie('uid', UIDcountrer, {maxAge: 1000 * 60 * 60});
                 }
                 res.status(200).send(JSON.stringify(userInformation));
             } else {
@@ -186,58 +181,109 @@ module.exports = (PORT) => {
         });
     });
 
+
+    //Check if the client is connected
+    app.use(function (req, res, next) {
+        if (logedInUsersTag[req.cookies.uid])
+            next();
+        else
+            res.status(404).send(JSON.stringify({text: "NOT LOGGED IN"}));
+    });
+
+
     app.post('/api/logout', function (req, res) {
-        //User logged out - so we remove his uid
+        //User logged out - so we remove from online lists of users
+        let username = logedInUsersTag[req.cookies.uid];
         delete logedInUsersTag[req.cookies.uid];
+        delete logedInUsers[username];
         res.status(200).send();
     });
 
 
-    app.post('/api/connection', function (req, res, next) {
+    app.post('/api/remove', function (req, res) {
 
-        let username = logedInUsersTag[req.cookies.uid];
-        if (username) {
+        let username = req.body.username;
+        let uid = logedInUsers[username];
 
-            //Set New cookie
-            UIDcountrer++;
-            logedInUsers[username] = UIDcountrer;
-            delete logedInUsersTag[req.cookies.uid];
-            logedInUsersTag[UIDcountrer] = username;
+        //Delete member from online members objects
+        delete logedInUsersTag[uid];
+        delete logedInUsersTag[username];
 
-            let options = {
-                maxAge: 1000 * 60 * 60,
-                // would expire after 60 minutes
-            };
-            res.cookie('uid', UIDcountrer);
-            fs.readFile(usersFile, 'utf8', function (err, data) {
-                if (err)
-                    res.status(500).send(JSON.stringify("Error while reading the file"));
+        fs.readFile(usersFile, 'utf8', function (err, data) {
+            if (err)
+                res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
 
-                let obj = JSON.parse(data);
-                for (x in obj) {
-                    if (obj[x].username === username) {
-                        let userInformation = {
-                            username: obj[x].username,
-                            first: obj[x].first,
-                            last: obj[x].last,
-                            email: obj[x].email,
-                            favorites: obj[x].favorites
-                        };
-                        res.status(200).send(JSON.stringify(userInformation));
-                    }
+            let obj = JSON.parse(data);
+
+            //Search and remove the member
+            for (x in obj)
+                if (obj[x].username === username) {
+
+                    //Delete member from array
+                    obj.splice(x, 1);
+
+                    //Write back the data
+                    fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
+                        if (err) {
+                            console.log(err.message);
+                            res.status(500).send(JSON.stringify({text: "Error override the file"}));
+                        }
+                        res.status(200).send();
+                    });
                 }
-            });
-        } else {
-            res.status(404).send(JSON.stringify("error"));
-        }
+        })
     });
 
+
+    //Set new cookie
+    app.use(function (req, res, next) {
+
+        //Set new UID in both objects
+        UIDcountrer++;
+        let username = logedInUsersTag[req.cookies.uid];
+        logedInUsers[username] = UIDcountrer;
+        delete logedInUsersTag[req.cookies.uid];
+        logedInUsersTag[UIDcountrer] = username;
+        req.cookies.uid = UIDcountrer;
+        res.cookie('uid', UIDcountrer, {maxAge: 1000 * 60 * 60});
+        next();
+    });
+
+
+    app.get('/api/connection', function (req, res) {
+
+        let username = logedInUsersTag[req.cookies.uid];
+        let data;
+        try {
+            data = fs.readFileSync(usersFile, 'utf8');
+
+        } catch (err) {
+            res.status(500).send(JSON.stringify({text: "Error reading the file"}));
+            return;
+        }
+
+        let obj = JSON.parse(data);
+        let userInformation = {};
+        for (x in obj) {
+            if (obj[x].username === username) {
+                userInformation = {
+                    username: obj[x].username,
+                    first: obj[x].first,
+                    last: obj[x].last,
+                    email: obj[x].email,
+                    favorites: obj[x].favorites
+                };
+                break;
+            }
+        }
+
+        res.status(200).send(JSON.stringify(userInformation));
+    });
 
     app.post('/api/addFavorite', function (req, res) {
 
         let username = req.body.username;
         let station = req.body.station;
-
         fs.readFile(usersFile, 'utf8', function (err, data) {
             if (err) {
                 res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
@@ -254,7 +300,7 @@ module.exports = (PORT) => {
                             console.log(err.message);
                             res.status(500).send(JSON.stringify({text: "Error override the file"}));
                         }
-                        console.log('file saved');
+                        console.log('File updated with new favorites');
                     });
                 }
             }
@@ -302,39 +348,30 @@ module.exports = (PORT) => {
 
         //Constant user name
         let username = req.body.username;
+        fs.readFile(usersFile, 'utf8', function (err, data) {
+            if (err) {
+                res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
+            }
+            let obj = JSON.parse(data);
+            //Search for the file
+            for (x in obj) {
+                if (obj[x].username === username) {
+                    obj[x].first = req.body.first;
+                    obj[x].last = req.body.last;
+                    obj[x].email = req.body.email;
+                    obj[x].pass = req.body.pass;
 
-        // Check if user is connected
-        if (logedInUsers[username]) {
-
-            fs.readFile(usersFile, 'utf8', function (err, data) {
-                if (err) {
-                    res.status(500).send(JSON.stringify({text: "Error while reading the file"}));
+                    // Write back updated user details to users file
+                    fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
+                        if (err) {
+                            console.log(err.message);
+                            res.status(500).send(JSON.stringify({text: "Error override the file"}));
+                        }
+                    });
+                    break;
                 }
-                let obj = JSON.parse(data);
-                //Search for the file
-                for (x in obj) {
-                    if (obj[x].username === username) {
-                        obj[x].first = req.body.first;
-                        obj[x].last = req.body.last;
-                        obj[x].email = req.body.email;
-                        obj[x].pass = req.body.pass;
-
-                        // Write back updated user details to users file
-                        fs.writeFile(usersFile, JSON.stringify(obj), function (err) {
-                            if (err) {
-                                console.log(err.message);
-                                res.status(500).send(JSON.stringify({text: "Error override the file"}));
-                            }
-                        });
-                        break;
-                    }
-                }
-                res.status(200).send(JSON.stringify({text: "User details updated successfully"}));
-            });
-        }
-        else {
-            // User not logged in
-            res.status(400).send(JSON.stringify({text: "Error with request from client"}));
-        }
+            }
+            res.status(200).send(JSON.stringify({text: "User details updated successfully"}));
+        });
     });
 };

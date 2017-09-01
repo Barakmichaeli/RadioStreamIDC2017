@@ -20,9 +20,10 @@ class Main extends Component {
     }
 
     fetchData() {
+
         let self = this;
         fetch("api/connection", {
-            method: "POST",
+            method: "GET",
             headers: {
                 Accept: 'application/json',
                 "Content-Type": "application/json"
@@ -30,6 +31,7 @@ class Main extends Component {
             credentials: "include"
         }).then(function (response) {
             response.json().then(function (user) {
+
                 if (response.status === 200) {
                     sessionStorage.setItem("username", user.username);
                     sessionStorage.setItem("first", user.first);
@@ -39,6 +41,7 @@ class Main extends Component {
                     self.setState({
                         data: true
                     });
+                    history.push(window.location.pathname);
                 }
                 else {
                     history.push('/login');
@@ -66,7 +69,7 @@ class Main extends Component {
                     :
                     <div>
                         {this.fetchData()}
-                        <div className="loading"> </div>
+                        <div className="loading"></div>
                     </div>
                 }
             </div>

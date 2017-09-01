@@ -27,6 +27,7 @@ class Favorites extends Component {
                                favorite={true}
                                currentStation={this.state.currentStation}
                                mode={"Favorites"}
+                               key = {favorites[i][1]}
                                station={favorites[i]}/>);
         return arr;
     }

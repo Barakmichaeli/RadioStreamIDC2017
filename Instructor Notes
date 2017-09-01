@@ -9,11 +9,14 @@ Link to heroku -
 https://radiostream.herokuapp.com
 
 
-Extra notes -
+Website features:
+
 1. Generate radio stations list and play the selected station.
 2. Live streaming of radio stations which are part of a predefined list.
-3. save favorite radio stations and also the ability to remove them.
+3. Link each station to it's original home page.
+4. Save favorites radio stations and also provide the ability to remove them.
 4. Remember personal information as part of the current session (using sessionStorage)
-and provide the ability to change them.
+and provide the ability to change the information.
 5. Remember logged in users using uid (as we learned in class) and therefore users can re enter the website
-directly to the main pages + fetch his information at the same time.
+directly to the main pages + fetch user information from the server at the same time.
+6.Each user can delete his own account.

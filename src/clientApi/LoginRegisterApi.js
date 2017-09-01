@@ -256,7 +256,26 @@ export function updateData(e) {
     })
 }
 
+export function removeUser() {
 
+    fetch("api/remove", {
+        method: "POST",
+        body: JSON.stringify({username: sessionStorage.getItem("username")}),
+        headers: {
+            Accept: 'application/json',
+            "Content-Type": "application/json"
+        },
+    }).then(function (response) {
+        //Clear cookies and the current browser tab session
+        console.log(response.status);
+        sessionStorage.clear();
+        document.cookie = 'uid=; Max-Age=0';
+    }, function (error) {
+        console.log(error.message);
+    });
+
+    history.push('/login');
+}
 
 
 
