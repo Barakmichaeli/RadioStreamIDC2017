@@ -132,8 +132,10 @@ export function Log() {
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
         pass[0].placeholder = 'Enter Password';
+        document.getElementById("msg").innerHTML = "Invalid password";
         flag = true;
     } else {
+        document.getElementById("msg").innerHTML = "";
         pass[0].style.borderColor = "white";
     }
     if (flag)
@@ -178,13 +180,14 @@ export function updateData() {
     let pass = document.getElementsByClassName('pass');
     let repass = document.getElementsByClassName('repass');
     let flag = false;
+    let str = "";
+
 
     if (firstname[0].value.length === 0) {
         firstname[0].style.borderColor = "red";
         flag = true;
-    } else {
+    } else
         firstname[0].style.borderColor = "white";
-    }
 
 
     if (lastname[0].value.length === 0) {
@@ -197,34 +200,42 @@ export function updateData() {
 
     if (!validateEmail(email[0].value)) {
         email[0].style.borderColor = "red";
+        str = "Email is not valid";
         flag = true;
     } else {
         email[0].style.borderColor = "white";
+        document.getElementById("update-message").innerHTML = "";
     }
 
 
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
+        str = "Password must be at least 8 Characters";
         flag = true;
-    } else
+    } else {
+        document.getElementById("update-message").innerHTML = "";
         pass[0].style.borderColor = "white";
-
+    }
 
     if (repass[0].value.length < 8) {
         repass[0].style.borderColor = "red";
+        str = "Password must be at least 8 Characters";
         flag = true;
-    } else
+    } else {
         repass[0].style.borderColor = "white";
+        document.getElementById("update-message").innerHTML = "";
+    }
 
     if (repass[0].value !== pass[0].value) {
-        document.getElementsByClassName("update-message")[0].innerHTML = "Passwords do not match";
+        str = "Passwords do not match";
         flag = true;
     } else
-        document.getElementsByClassName("update-message")[0].innerHTML = "";
+        document.getElementById("update-message").innerHTML = "";
 
-    if (flag)
+    if (flag) {
+        document.getElementById("update-message").innerHTML = str;
         return;
-
+    }
 
     //update current sessionStorage
     sessionStorage.setItem("username", username[0].value);
@@ -249,10 +260,10 @@ export function updateData() {
     }).then(function (response) {
         response.json().then(function (res) {
             if (response.status === 200) {
-                document.getElementsByClassName("update-message")[0].innerHTML = "Information Updated :)";
+                document.getElementById("update-message").innerHTML = "Information Updated :)";
             }
             else {
-                document.getElementsByClassName("update-message")[0].innerHTML = "Please try again  :(";
+                document.getElementById("update-message").innerHTML = "Please try again  :(";
             }
         });
     }, function (error) {

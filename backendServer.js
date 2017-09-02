@@ -299,7 +299,6 @@ module.exports = (PORT) => {
                             console.log(err.message);
                             res.status(500).send(JSON.stringify({text: "Error override the file"}));
                         }
-                        console.log('File updated with new favorites');
                     });
                 }
             }

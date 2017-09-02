@@ -68,7 +68,7 @@ export  default class Personal extends Component {
                     <input className="repass" type="password" placeholder="Password again"/>
                     <br/> <br/>
 
-                    <h3 className="update-message"
+                    <h3 id="update-message"
                         style={{textAlign: "center"}}>
 
                     </h3>
