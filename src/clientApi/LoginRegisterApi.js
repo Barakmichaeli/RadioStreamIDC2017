@@ -20,20 +20,20 @@ export function Signup() {
     let pass = document.getElementsByClassName('pass');
     let repass = document.getElementsByClassName('re-pass');
     let flag = false;
-
+    let str = "";
 
     //Check input validation
     if (username[0].value.length < 4) {
         username[0].style.borderColor = "red";
-        username[0].placeholder = 'Enter User Name';
+        str = "Username must be at least 4 characters";
         flag = true;
     } else {
         username[0].style.borderColor = "white";
+        document.getElementById("msg").innerHTML = "";
     }
 
     if (firstname[0].value.length === 0) {
         firstname[0].style.borderColor = "red";
-        firstname[0].placeholder = 'Enter First Name';
         flag = true;
     } else {
         firstname[0].style.borderColor = "white";
@@ -42,47 +42,50 @@ export function Signup() {
 
     if (lastname[0].value.length === 0) {
         lastname[0].style.borderColor = "red";
-        lastname[0].placeholder = 'Enter Last Name';
         flag = true;
     } else {
         lastname[0].style.borderColor = "white";
     }
 
-
     if (!validateEmail(email[0].value)) {
         email[0].style.borderColor = "red";
-        email[0].placeholder = 'Enter Valid Mail';
+        str = "Email is not valid";
         flag = true;
     } else {
         email[0].style.borderColor = "white";
+        document.getElementById("msg").innerHTML = "";
     }
 
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
-        pass[0].placeholder = 'Enter Valid Password';
+        str = "Password must be at least 8 Characters";
         flag = true;
     } else {
         pass[0].style.borderColor = "white";
+        document.getElementById("msg").innerHTML = "";
     }
-
 
     if (repass[0].value.length < 8) {
         repass[0].style.borderColor = "red";
-        repass[0].placeholder = 'Password again';
+        str = "Password must be at least 8 Characters";
         flag = true;
     } else {
         repass[0].style.borderColor = "white";
+        document.getElementById("msg").innerHTML = "";
     }
 
     if (repass[0].value !== pass[0].value) {
-        document.getElementById("msg").innerHTML = "Passwords do not match";
-        flag = true;
+        str = "Passwords do not match";
+        repass[0].style.borderColor = "red";
+        pass[0].style.borderColor = "red";
     } else {
         document.getElementById("msg").innerHTML = "";
     }
-    if (flag)
-        return;
 
+    if (flag) {
+        document.getElementById("msg").innerHTML = str;
+        return;
+    }
 
     fetch("api/register", {
         method: "POST",
@@ -175,14 +178,15 @@ export function updateData() {
     let repass = document.getElementsByClassName('repass');
     let flag = false;
 
-    if (firstname[0].value.length < 4) {
+    if (firstname[0].value.length === 0) {
         firstname[0].style.borderColor = "red";
-        firstname[0].placeholder = 'Enter First Name';
         flag = true;
-    } else
+    } else {
         firstname[0].style.borderColor = "white";
+    }
 
-    if (lastname[0].value.length < 4) {
+
+    if (lastname[0].value.length === 0) {
         lastname[0].style.borderColor = "red";
         lastname[0].placeholder = 'Enter Last Name';
         flag = true;
@@ -190,12 +194,14 @@ export function updateData() {
         lastname[0].style.borderColor = "white";
 
 
+
     if (!validateEmail(email[0].value)) {
         email[0].style.borderColor = "red";
-        email[0].placeholder = 'Enter Valid Mail';
         flag = true;
-    } else
+    } else {
         email[0].style.borderColor = "white";
+    }
+
 
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
@@ -210,7 +216,6 @@ export function updateData() {
     } else
         repass[0].style.borderColor = "white";
 
-
     if (repass[0].value !== pass[0].value) {
         document.getElementsByClassName("update-message")[0].innerHTML = "Passwords do not match";
         flag = true;
@@ -220,12 +225,12 @@ export function updateData() {
     if (flag)
         return;
 
+
     //update current sessionStorage
     sessionStorage.setItem("username", username[0].value);
     sessionStorage.setItem("first", firstname[0].value);
     sessionStorage.setItem("last", lastname[0].value);
     sessionStorage.setItem("email", email[0].value);
-
 
     //update the server
     fetch("api/update", {

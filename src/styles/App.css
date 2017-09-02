@@ -4,38 +4,16 @@
 @import url(https://fonts.googleapis.com/css?family=Catamaran);
 @import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
 
-/*@font-face {*/
-    /*font-family: 'Amatica SC';*/
-    /*src: url('https://fonts.googleapis.com/css?family=Amatica+SC');*/
-/*}*/
-
-/*@font-face {*/
-    /*font-family: 'Catamaran';*/
-    /*src: url('https://fonts.googleapis.com/css?family=Catamaran');*/
-/*}*/
-
-/*@font-face {*/
-    /*font-family: 'Architects Daughter';*/
-    /*src: url('https://fonts.googleapis.com/css?family=Architects+Daughter');*/
-/*}*/
-
-/*@font-face {*/
-    /*font-family: 'Raleway';*/
-    /*src: url('https://fonts.googleapis.com/css?family=Raleway');*/
-/*}*/
-
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
-    min-width: 450px;
 }
 
 body {
     background-size: cover;
     font-family: 'Catamaran', monospace !important;
-    min-width: 550px;
 }
 
 h1, h2, h3, h4, h6, a {
@@ -193,7 +171,7 @@ td:hover {
 }
 
 .team {
-    background: url("../images/martin-wessely-210.jpg") fixed center no-repeat;
+    background: url("../images/mike-wilson-300682.jpg") fixed center no-repeat;
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -306,9 +284,6 @@ audio {
         width: 90%;
     }
 
-    .home-title {
-        width: 45%;
-    }
 
     p {
         font-size: 21px !important;
@@ -336,11 +311,9 @@ audio {
         margin-top: 6%;
     }
 
-    .alon {
-        margin-top: 9%;
-    }
-
     .home-title {
+        font-size: 110% !important;
+        width: 54%;
         margin-left: 10%;
     }
 
@@ -353,7 +326,7 @@ audio {
     }
 
     .alon {
-        margin-top: 4% !important;
+        margin-top: 12% !important;
     }
 
     .stations-list {
@@ -381,18 +354,22 @@ audio {
 
 @media only screen and (min-width: 150px) and (max-width: 550px) {
 
-    .home-title {
-        font-size: 11px;
+    .barak {
+        margin-top: 18vh !important;
     }
+
     .alon {
-        margin-right: 45% !important;
-        margin-top: 32% !important;
+        margin-right: 15% !important;
+        margin-top: 8vh !important;
     }
 
+
+    .h1{
+        font-size: 34px !important;
+    }
     td{
-        font-size: 4vw;
+        font-size: 3.8vw;
     }
-
 
     .login-header h1{
         font-size: 40px;

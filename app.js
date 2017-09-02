@@ -16,5 +16,3 @@ if (PROD) {
 } else {
     devServer(PORT);
 }
-
-
