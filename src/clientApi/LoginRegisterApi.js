@@ -78,6 +78,7 @@ export function Signup() {
         str = "Passwords do not match";
         repass[0].style.borderColor = "red";
         pass[0].style.borderColor = "red";
+        flag = true;
     } else {
         document.getElementById("msg").innerHTML = "";
     }
@@ -192,7 +193,6 @@ export function updateData() {
         flag = true;
     } else
         lastname[0].style.borderColor = "white";
-
 
 
     if (!validateEmail(email[0].value)) {

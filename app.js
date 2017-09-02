@@ -2,7 +2,6 @@
  * Created by barak on 18/08/2017.
  */
 
-
 let devServer = require("./server");
 let backServer = require('./backendServer');
 

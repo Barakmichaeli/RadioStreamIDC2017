@@ -26,6 +26,7 @@ class MainBar extends Component {
             credentials: "include"
         }).then(function (response) {
             //Clear cookies and the current browser tab sessionStorage
+            console.log("logged out");
             sessionStorage.clear();
             document.cookie = 'uid=; Max-Age=0';
         }, function (error) {
