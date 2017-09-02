@@ -49,7 +49,7 @@ export function Signup() {
 
     if (!validateEmail(email[0].value)) {
         email[0].style.borderColor = "red";
-        str = "Email is not valid";
+        str = (str.length === 0) ? "Email is not valid" : str;
         flag = true;
     } else {
         email[0].style.borderColor = "white";
@@ -58,7 +58,7 @@ export function Signup() {
 
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
-        str = "Password must be at least 8 Characters";
+        str = (str.length === 0) ? "Password must be at least 8 Characters" : str;
         flag = true;
     } else {
         pass[0].style.borderColor = "white";
@@ -67,7 +67,7 @@ export function Signup() {
 
     if (repass[0].value.length < 8) {
         repass[0].style.borderColor = "red";
-        str = "Password must be at least 8 Characters";
+        str = (str.length === 0) ? "Password must be at least 8 Characters" : str;
         flag = true;
     } else {
         repass[0].style.borderColor = "white";
@@ -75,7 +75,7 @@ export function Signup() {
     }
 
     if (repass[0].value !== pass[0].value) {
-        str = "Passwords do not match";
+        str = (str.length === 0) ? "Passwords do not match" : str;
         repass[0].style.borderColor = "red";
         pass[0].style.borderColor = "red";
         flag = true;
@@ -210,7 +210,7 @@ export function updateData() {
 
     if (pass[0].value.length < 8) {
         pass[0].style.borderColor = "red";
-        str = "Password must be at least 8 Characters";
+        str = (str.length === 0) ? "Password must be at least 8 Characters" : str;
         flag = true;
     } else {
         document.getElementById("update-message").innerHTML = "";
@@ -219,7 +219,7 @@ export function updateData() {
 
     if (repass[0].value.length < 8) {
         repass[0].style.borderColor = "red";
-        str = "Password must be at least 8 Characters";
+        str = (str.length === 0) ? "Password must be at least 8 Characters" : str;
         flag = true;
     } else {
         repass[0].style.borderColor = "white";
@@ -227,7 +227,7 @@ export function updateData() {
     }
 
     if (repass[0].value !== pass[0].value) {
-        str = "Passwords do not match";
+        str = (str.length === 0) ? "Passwords do not match" : str;
         flag = true;
     } else
         document.getElementById("update-message").innerHTML = "";
