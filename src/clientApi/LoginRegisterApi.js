@@ -11,7 +11,7 @@ function validateEmail(email) {
 }
 
 
-export function Signup(e) {
+export function Signup() {
 
     let username = document.getElementsByClassName('username');
     let firstname = document.getElementsByClassName('firstname');
@@ -111,7 +111,7 @@ export function Signup(e) {
 }
 
 
-export function Log(e) {
+export function Log() {
 
     let username = document.getElementsByClassName('username');
     let pass = document.getElementsByClassName('pass');
@@ -165,7 +165,7 @@ export function Log(e) {
 }
 
 
-export function updateData(e) {
+export function updateData() {
 
     let username = document.getElementsByClassName('username');
     let firstname = document.getElementsByClassName('firstname');
@@ -243,12 +243,11 @@ export function updateData(e) {
         credentials: "same-origin"
     }).then(function (response) {
         response.json().then(function (res) {
-            console.log(response.status);
             if (response.status === 200) {
                 document.getElementsByClassName("update-message")[0].innerHTML = "Information Updated :)";
             }
             else {
-                document.getElementsByClassName("update-message")[0].innerHTML = "Opps.. something went wrong, please try again later";
+                document.getElementsByClassName("update-message")[0].innerHTML = "Please try again  :(";
             }
         });
     }, function (error) {

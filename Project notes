@@ -9,6 +9,10 @@ Link to heroku -
 https://radiostream.herokuapp.com
 
 
+local address - localhost:8080
+server/api local port - 8079.
+
+
 Website features:
 
 1. Generate radio stations list and play the selected station.

@@ -31,7 +31,6 @@ class Main extends Component {
             credentials: "include"
         }).then(function (response) {
             response.json().then(function (user) {
-
                 if (response.status === 200) {
                     sessionStorage.setItem("username", user.username);
                     sessionStorage.setItem("first", user.first);
@@ -69,7 +68,10 @@ class Main extends Component {
                     :
                     <div>
                         {this.fetchData()}
-                        <div className="loading"></div>
+                        {/*Loading Data screen untill we get result from the server*/}
+                        <div className="loading">
+
+                        </div>
                     </div>
                 }
             </div>

@@ -50,7 +50,7 @@ class ListItem extends Component {
         let username = sessionStorage.getItem("username");
         let station = this.state.station[1];
 
-        //Update the session information
+        //Update the sessionStorage data
         let favorites = JSON.parse(sessionStorage.getItem("favorites"));
         let index = favorites.indexOf(station);
         favorites.splice(index, 1);
@@ -128,11 +128,11 @@ class ListItem extends Component {
                          alt="favorite"
                          style={{width: "35px", height: "35px", display: "inline", float: "right", cursor: "pointer"}}
                          onClick={() => {
-                             //Favorite mode
+                             //Favorite mode - we can only remove station from list
                              if (!this.props.mode === "Favorite") {
                                  this.removeFavorite(this.props.mode);
                              } else {
-                                 //Home mode
+                                 //Home mode - we can add or remove from favorites
                                  if (!this.state.favorite)
                                      this.addFavorite();
                                  else

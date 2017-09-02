@@ -33,10 +33,13 @@ class Register extends Component {
                                                          style={{width: "20px", height: "15px", marginBottom: "0px"}}
                                                          name="gender" type="radio" value="Female"/> Female </label>
                     <br/>
-                    <h5 id="msg"> </h5>
+                    <h5 id="msg">
+
+                    </h5>
                     <button onClick={ (e) => {
                         Signup(e);
-                    }}> Signup
+                    }}>
+                        Signup
                     </button>
                     <br/>
                     <Link to={"/login"}> <input type="button" value="Login" className="register-button"/></Link>

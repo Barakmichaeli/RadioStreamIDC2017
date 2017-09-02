@@ -16,7 +16,7 @@ class Favorites extends Component {
 
         let arr = [];
 
-        //the favorites from the server
+        //Get favorites from sessionStorage
         let favorites = JSON.parse(sessionStorage.getItem("favorites"));
         favorites = stations.filter((station) => {
             return favorites.includes(station[1]);
@@ -27,7 +27,7 @@ class Favorites extends Component {
                                favorite={true}
                                currentStation={this.state.currentStation}
                                mode={"Favorites"}
-                               key = {favorites[i][1]}
+                               key={favorites[i][1]}
                                station={favorites[i]}/>);
         return arr;
     }

@@ -182,9 +182,8 @@ module.exports = (PORT) => {
     });
 
 
-    //Check if the client is connected
+    //Check if the client is connected and therefore allowed to continue match urls
     app.use(function (req, res, next) {
-        console.log(req.cookies.uid);
         if (logedInUsersTag[req.cookies.uid])
             next();
         else
@@ -205,7 +204,6 @@ module.exports = (PORT) => {
 
         let username = req.body.username;
         let uid = logedInUsers[username];
-        console.log(username);
 
         //Delete member from online members objects
         delete logedInUsersTag[uid];
@@ -239,7 +237,6 @@ module.exports = (PORT) => {
 
     //Set new cookie
     app.use(function (req, res, next) {
-
         //Set new UID in both objects
         UIDcountrer++;
         let username = logedInUsersTag[req.cookies.uid];

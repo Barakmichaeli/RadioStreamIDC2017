@@ -19,14 +19,14 @@ class Home extends Component {
         let favorites = sessionStorage.getItem("favorites");
 
         //generate list
-        for (let i = 0; i < stations.length; i++){
+        for (let i = 0; i < stations.length; i++) {
             let status = (favorites.includes(stations[i][1]));
             arr.push(<ListItem playStation={this.playStation.bind(this)}
                                favorite={status}
                                currentStation={this.state.currentStation}
                                mode={"Home"}
                                station={stations[i]}
-                               key = {stations[i][1]} />);
+                               key={stations[i][1]}/>);
         }
         return arr;
     }

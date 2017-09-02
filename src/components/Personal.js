@@ -67,15 +67,18 @@ export  default class Personal extends Component {
                     <h3>Retype password:</h3>
                     <input className="repass" type="password" placeholder="Password again"/>
                     <br/> <br/>
-                    <h3 className="update-message"
-                        style={{textAlign : "center"}}> </h3>
 
-                    <button onClick={ (e) => {
+                    <h3 className="update-message"
+                        style={{textAlign: "center"}}>
+
+                    </h3>
+
+                    <button onClick={(e) => {
                         updateData(e);
                     }}> Update
                     </button>
 
-                    <button  onClick={ (e) => {
+                    <button onClick={(e) => {
                         removeUser(e);
                     }}> Remove user
                     </button>
