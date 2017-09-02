@@ -7,7 +7,7 @@ module.exports = (PORT) => {
     let cookieParser = require('cookie-parser');
     let fs = require('fs');
     let logedInUsers = {};
-    let UIDcountrer = 0;
+    let UIDcountrer = 100;
     let logedInUsersTag = {};
     let usersFile = './usersList.json';
     app.use(bodyParser.json());
